@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{b4b486ad-b562-4506-9061-31c8e468b8ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{009a9691-70fa-47f0-a472-a707410a02fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{44923020-ce8d-4a36-85fd-63535cca6286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Music">
+      <UniqueIdentifier>{3a5a0cb4-2cad-4158-bc48-2e676302b1f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="Player1.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacles.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player1.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacles.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
