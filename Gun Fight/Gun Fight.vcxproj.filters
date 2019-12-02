@@ -1,40 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="System">
-      <UniqueIdentifier>{b4b486ad-b562-4506-9061-31c8e468b8ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
-      <UniqueIdentifier>{009a9691-70fa-47f0-a472-a707410a02fd}</UniqueIdentifier>
+      <UniqueIdentifier>{a3a86cd5-fac8-4add-b7b1-2d612ca82455}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects">
-      <UniqueIdentifier>{44923020-ce8d-4a36-85fd-63535cca6286}</UniqueIdentifier>
+      <UniqueIdentifier>{b7c90025-1b71-4c9f-8d58-dc9b39244376}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Music">
-      <UniqueIdentifier>{3a5a0cb4-2cad-4158-bc48-2e676302b1f5}</UniqueIdentifier>
+    <Filter Include="System">
+      <UniqueIdentifier>{c53942c3-5cdb-449b-bdfa-0d3117456c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Players">
+      <UniqueIdentifier>{401d1a28-5641-4cb5-bfe8-7a3150fc6b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Obstacles">
+      <UniqueIdentifier>{2127c8e4-f718-4629-b5e9-498b9e3d1bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Bullets">
+      <UniqueIdentifier>{00257f27-8ffb-447d-966c-85b397e42a5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="Player1.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="..\src\System\Game_loop.cpp">
+      <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="Player2.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="..\src\Objects\Obstacles.cpp">
+      <Filter>Objects\Obstacles</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacles.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="..\src\Objects\Player1.cpp">
+      <Filter>Objects\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Player2.cpp">
+      <Filter>Objects\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Credits.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Gameplay.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Menu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Bullet.cpp">
+      <Filter>Objects\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\Screen.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player1.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="..\src\System\Game_loop.h">
+      <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="..\src\Objects\Obstacles.h">
+      <Filter>Objects\Obstacles</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacles.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="..\src\Objects\Player1.h">
+      <Filter>Objects\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Player2.h">
+      <Filter>Objects\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Credits.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Gameplay.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Menu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Bullet.h">
+      <Filter>Objects\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Screen.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

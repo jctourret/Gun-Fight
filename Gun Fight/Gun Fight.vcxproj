@@ -20,14 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="Obstacles.cpp" />
-    <ClCompile Include="Player1.cpp" />
-    <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="..\src\Objects\Bullet.cpp" />
+    <ClCompile Include="..\src\Objects\Obstacles.cpp" />
+    <ClCompile Include="..\src\Objects\Player1.cpp" />
+    <ClCompile Include="..\src\Objects\Player2.cpp" />
+    <ClCompile Include="..\src\Scenes\Credits.cpp" />
+    <ClCompile Include="..\src\Scenes\Gameplay.cpp" />
+    <ClCompile Include="..\src\Scenes\Menu.cpp" />
+    <ClCompile Include="..\src\System\Game_loop.cpp" />
+    <ClCompile Include="..\src\System\Screen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Obstacles.h" />
-    <ClInclude Include="Player1.h" />
-    <ClInclude Include="Player2.h" />
+    <ClInclude Include="..\src\Objects\Bullet.h" />
+    <ClInclude Include="..\src\Objects\Obstacles.h" />
+    <ClInclude Include="..\src\Objects\Player1.h" />
+    <ClInclude Include="..\src\Objects\Player2.h" />
+    <ClInclude Include="..\src\Scenes\Credits.h" />
+    <ClInclude Include="..\src\Scenes\Gameplay.h" />
+    <ClInclude Include="..\src\Scenes\Menu.h" />
+    <ClInclude Include="..\src\System\Game_loop.h" />
+    <ClInclude Include="..\src\System\Screen.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
