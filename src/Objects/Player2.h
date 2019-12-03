@@ -1,37 +1,53 @@
-
+#ifndef PLAYER2_H
+#define PLAYER2_H
 #include "raylib.h"
 #include "Bullet.h"
+#include "Player1.h"
 
-const int p2MaxBullets = 6;
+namespace GunFight {
 
-class Player2 {
-private:
-	Rectangle _body;
-	Bullet* _p2Bullets[p2MaxBullets];
-	int _bulletsFired;
-	int _score;
-	bool _isDead;
-public:
-	Player2(float x, float y, float width, float height);
-	~Player2();
-	void setBody(Rectangle body);
-	void setX(float x);
-	void setY(float y);
-	void setWidth(float width);
-	void setHeight(float height);
-	void setScore(int score);
-	Rectangle getBody();
-	int getBulletsFired();
-	int getScore();
-	bool getIsDead();
-	void draw();
-	void move();
-	void fireBullet();
-	void moveBullet();
-	void checkP1BulletCollision(Rectangle body);
-	bool p1Dies = false;
-	void die(bool& die);
-	void reload();
-};
+	const int p2MaxBullets = 6;
 
-
+	class Player2 {
+	private:
+		Rectangle _body;
+		Bullet* _p2Bullets[p2MaxBullets];
+		int _bulletsLeft;
+		int _score;
+		Aim _aim;
+		bool _isDead;
+		bool _isMoving;
+		Texture2D _F1_Up;
+		Texture2D _F1_Mid;
+		Texture2D _F1_Down;
+		Texture2D _F2_Up;
+		Texture2D _F2_Mid;
+		Texture2D _F2_Down;
+		Texture2D _F3_Up;
+		Texture2D _F3_Mid;
+		Texture2D _F3_Down;
+		Sound _wScream;
+	public:
+		Player2(float x, float y, float width, float height);
+		~Player2();
+		void setBody(Rectangle body);
+		void setX(float x);
+		void setY(float y);
+		void setWidth(float width);
+		void setHeight(float height);
+		void setScore(int score);
+		Rectangle getBody();
+		int getBulletsLeft();
+		int getScore();
+		bool getIsDead();
+		void draw();
+		void move();
+		void fireBullet();
+		void moveBullet();
+		void checkP1BulletCollision(Rectangle body);
+		void die(bool& die);
+		void reload();
+		bool p1Dies = false;
+	};
+}
+#endif

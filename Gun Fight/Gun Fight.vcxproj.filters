@@ -13,20 +13,17 @@
     <Filter Include="Objects\Players">
       <UniqueIdentifier>{401d1a28-5641-4cb5-bfe8-7a3150fc6b33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Obstacles">
-      <UniqueIdentifier>{2127c8e4-f718-4629-b5e9-498b9e3d1bc7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\Bullets">
       <UniqueIdentifier>{00257f27-8ffb-447d-966c-85b397e42a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Music">
+      <UniqueIdentifier>{b8043879-a53a-4a93-adae-59d223ee31a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\System\Game_loop.cpp">
       <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Objects\Obstacles.cpp">
-      <Filter>Objects\Obstacles</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Objects\Player1.cpp">
       <Filter>Objects\Players</Filter>
@@ -49,13 +46,13 @@
     <ClCompile Include="..\src\System\Screen.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Music\music.cpp">
+      <Filter>Music</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\Game_loop.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Objects\Obstacles.h">
-      <Filter>Objects\Obstacles</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Objects\Player1.h">
       <Filter>Objects\Players</Filter>
@@ -77,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="..\src\System\Screen.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Music\music.h">
+      <Filter>Music</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

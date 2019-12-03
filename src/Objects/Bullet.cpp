@@ -1,82 +1,87 @@
 #include "Bullet.h"
 #include "System/Screen.h"
 
-const float bulletSpeed = 2000.0f;
+using namespace GunFight;
 
-Bullet::Bullet(float x, float y, float width, float height){
-	_body.x = x;
-	_body.y = y;
-	_body.width = width;
-	_body.height = height;
-	_speed = bulletSpeed;
-	_direction.x=NULL;
-	_direction.y=NULL;
-	_hasScored = false;
-}
+namespace GunFight {
 
-Bullet::~Bullet(){
-}
+	static const float bulletSpeed = 2000.0f;
 
-void Bullet::setBody(Rectangle body) {
-	_body = body;
-}
+	Bullet::Bullet(float x, float y, float width, float height) {
+		_body.x = x;
+		_body.y = y;
+		_body.width = width;
+		_body.height = height;
+		_speed = bulletSpeed;
+		_direction.x = NULL;
+		_direction.y = NULL;
+		_hasScored = false;
+	}
 
-void Bullet::setBodyX(float x) {
-	_body.x=x;
-}
+	Bullet::~Bullet() {
+	}
 
-void Bullet::setBodyY(float y) {
-	_body.y = y;
-}
+	void Bullet::setBody(Rectangle body) {
+		_body = body;
+	}
 
-void Bullet::setSpeed(float speed) {
-	_speed = speed;
-}
+	void Bullet::setBodyX(float x) {
+		_body.x = x;
+	}
 
-void Bullet::setDirectionX(float x) {
-	_direction.x = x;
-}
+	void Bullet::setBodyY(float y) {
+		_body.y = y;
+	}
 
-void Bullet::setDirectionY(float y) {
-	_direction.y = y;
-}
+	void Bullet::setSpeed(float speed) {
+		_speed = speed;
+	}
 
-void Bullet::setHasScored(bool hasScored) {
-	_hasScored = hasScored;
-}
+	void Bullet::setDirectionX(float x) {
+		_direction.x = x;
+	}
 
-Rectangle Bullet::getBody() {
-	return _body;
-}
+	void Bullet::setDirectionY(float y) {
+		_direction.y = y;
+	}
 
-float Bullet::getBodyX() {
-	return _body.x;
-}
+	void Bullet::setHasScored(bool hasScored) {
+		_hasScored = hasScored;
+	}
 
-float Bullet::getBodyY() {
-	return _body.y;
-}
+	Rectangle Bullet::getBody() {
+		return _body;
+	}
 
-float Bullet::getBodyHeight() {
-	return _body.height;
-}
+	float Bullet::getBodyX() {
+		return _body.x;
+	}
 
-float Bullet::getSpeed() {
-	return _speed;
-}
+	float Bullet::getBodyY() {
+		return _body.y;
+	}
 
-float Bullet::getDirectionX() {
-	return _direction.x;
-}
+	float Bullet::getBodyHeight() {
+		return _body.height;
+	}
 
-float Bullet::getDirectionY() {
-	return _direction.y;
-}
+	float Bullet::getSpeed() {
+		return _speed;
+	}
 
-bool Bullet::getHasScored(){
-	return _hasScored;
-}
+	float Bullet::getDirectionX() {
+		return _direction.x;
+	}
 
-void Bullet::draw() {
-	DrawRectangleRec(_body, RAYWHITE);
+	float Bullet::getDirectionY() {
+		return _direction.y;
+	}
+
+	bool Bullet::getHasScored() {
+		return _hasScored;
+	}
+
+	void Bullet::draw() {
+		DrawRectangleRec(_body, RAYWHITE);
+	}
 }
