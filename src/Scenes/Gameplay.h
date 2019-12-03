@@ -11,6 +11,8 @@ namespace GunFight {
 		bool _gameplayOn;
 		bool _toMenu;
 		bool _toCredits;
+		bool _p1wins;
+		bool _p2wins;
 		Player1* _player1;
 		Player2* _player2;
 		int _timer;
@@ -25,6 +27,8 @@ namespace GunFight {
 		void update();
 		void draw();
 		void runTimer();
+		void checkWinner();
+		void toCredits();
 	};
 }
 #endif

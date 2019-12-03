@@ -6,21 +6,36 @@ using namespace GunFight;
 
 namespace GunFight {
 
-	const int player1PosX = screenWidth / 10;
-	const int player1PosY = screeenHeight / 2;
-	const int player2PosX = screenWidth - screenWidth / 10;
-	const int player2PosY = screeenHeight / 2;
+	static const int player1PosX = screenWidth / 10;
+	static const int player1PosY = screeenHeight / 2;
+	static const int player2PosX = screenWidth - screenWidth / 10;
+	static const int player2PosY = screeenHeight / 2;
+	static const int p1ScorePosX = 100;
+	static const int p1ScorePosY = 50;
+	static const int p2ScorePosX = 900;
+	static const int p2ScorePosY = 50;
+	static const int reloadingPosX = screenWidth/2;
+	static const int reloadingPosY = 100;
+	static const int timerPosX = screenWidth/2;
+	static const int timerPosY = 50;
+	static const int winTextPosX = screenWidth / 2 - 100;
+	static const int winTextPosY = 200;
+	static const int toCreditsPosX = screenWidth / 3;
+	static const int toCreditsPosy = 400;
+	static const int textFontSize = 40;
 
-	bool reloading = false;
+	static const Color textColor = YELLOW;
 
-	float reloadTimer = 0.0f;
-	float gameTimer = 0.0f;
+	static bool reloading = false;
 
-	const float reloadtime = 1.99f;
-	const float gameTime = 60.0f;
-	const float playersWidth = 50.0f;
-	const float playersHeight = 100.0f;
-	const float maxTreeSpawnHeight = screenWidth - 100;
+	static float reloadTimer = 0.0f;
+	static float gameTimer = 0.0f;
+
+	static const float reloadtime = 1.99f;
+	static const float gameTime = 60.0f;
+	static const float playersWidth = 50.0f;
+	static const float playersHeight = 100.0f;
+	static const float maxTreeSpawnHeight = screenWidth - 100;
 
 	Gameplay::Gameplay() {
 		_gameplayOn = false;
@@ -28,7 +43,7 @@ namespace GunFight {
 		_toCredits = false;
 		_player1 = new Player1(player1PosX, player1PosY, playersWidth, playersHeight);
 		_player2 = new Player2(player2PosX - playersWidth, player2PosY, playersWidth, playersHeight);
-		_timer = 60.0f;
+		_timer = gameTime;
 	}
 
 	Gameplay::~Gameplay() {
@@ -60,59 +75,66 @@ namespace GunFight {
 
 	void Gameplay::update() {
 		runTimer();
-		if (IsKeyPressed(KEY_ENTER)) {
-			_gameplayOn = false;
-			_toCredits = true;
-		}
-		if (!_player1->getIsDead() && !_player2->getIsDead()) {
-			_player1->fireBullet();
-			_player2->fireBullet();
-			_player1->move();
-			_player2->move();
-		}
-		_player1->moveBullet();
-		_player2->moveBullet();
-		_player1->checkP2BulletCollision(_player2->getBody());
-		_player2->checkP1BulletCollision(_player1->getBody());
-		_player1->die(_player2->p1Dies);
-		_player2->die(_player1->p2Dies);
-		if (_player1->getIsDead() || _player2->getIsDead()) {
-			if (reloadTimer <= reloadtime) {
-				reloading = true;
-				reloadTimer += GetFrameTime();
+		if (_gameplayOn) {
+			if (!_player1->getIsDead() && !_player2->getIsDead()) {
+				_player1->fireBullet();
+				_player2->fireBullet();
+				_player1->move();
+				_player2->move();
 			}
-			else {
-				_player1->reload();
-				_player2->reload();
+			_player1->moveBullet();
+			_player2->moveBullet();
+			_player1->checkP2BulletCollision(_player2->getBody());
+			_player2->checkP1BulletCollision(_player1->getBody());
+			_player1->die(_player2->p1Dies);
+			_player2->die(_player1->p2Dies);
+			if (_player1->getIsDead() || _player2->getIsDead()) {
+				if (reloadTimer <= reloadtime) {
+					reloading = true;
+					reloadTimer += GetFrameTime();
+				}
+				else {
+					_player1->reload();
+					_player2->reload();
+				}
 			}
-		}
-		if (_player1->getBulletsLeft() == 0 && _player2->getBulletsLeft() == 0) {
-			if (reloadTimer <= reloadtime) {
-				reloading = true;
-				reloadTimer += GetFrameTime();
+			if (_player1->getBulletsLeft() == 0 && _player2->getBulletsLeft() == 0) {
+				if (reloadTimer <= reloadtime) {
+					reloading = true;
+					reloadTimer += GetFrameTime();
+				}
+				else {
+					_player1->reload();
+					_player2->reload();
+				}
 			}
-			else {
-				_player1->reload();
-				_player2->reload();
+			if (_player1->getBulletsLeft() == p1MaxBullets && _player2->getBulletsLeft() == p2MaxBullets) {
+				reloading = false;
+				reloadTimer = 0.0f;
 			}
-		}
-		if (_player1->getBulletsLeft() == p1MaxBullets && _player2->getBulletsLeft() == p2MaxBullets) {
-			reloading = false;
-			reloadTimer = 0.0f;
 		}
 	}
 
 	void Gameplay::draw() {
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawText("Gameplay", screenWidth / 2, 100, 50, MAROON);
-		DrawText(FormatText("SCORE: %i", _player1->getScore()), 100, 50, 40, MAROON);
-		DrawText(FormatText("SCORE: %i", _player2->getScore()), 900, 50, 40, MAROON);
-		DrawText(FormatText("%i", _timer), screenWidth / 2, 50, 40, MAROON);
-		_player1->draw();
-		_player2->draw();
-		if (reloading) {
-			DrawText("Reload!", 300, 500, 50, MAROON);
+		DrawText(FormatText("SCORE: %i", _player1->getScore()), p1ScorePosX, p1ScorePosY, textFontSize, textColor);
+		DrawText(FormatText("SCORE: %i", _player2->getScore()), p2ScorePosX, p2ScorePosY, textFontSize, textColor);
+		DrawText(FormatText("%i", _timer), timerPosX, timerPosY, textFontSize, textColor);
+		if (_gameplayOn) {
+			_player1->draw();
+			_player2->draw();
+			if (reloading) {
+				DrawText("Reload!", reloadingPosX, reloadingPosY, textFontSize, textColor);
+			}
+		}
+		if (_p1wins) {
+			DrawText("Player 1 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
+			DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
+		}
+		if (_p2wins) {
+			DrawText("Player 2 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
+			DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
 		}
 		EndDrawing();
 	}
@@ -125,9 +147,24 @@ namespace GunFight {
 		}
 		if (_timer <= 0) {
 			_gameplayOn = false;
+			checkWinner();
+			toCredits();
+		}
+	}
+
+	void Gameplay::checkWinner() {
+		if (_player1->getScore() > _player2->getScore()) {
+			_p1wins = true;
+		}
+		if (_player2->getScore() > _player1->getScore()) {
+			_p2wins = true;
+		}
+	}
+
+	void Gameplay::toCredits() {
+		if (IsKeyPressed(KEY_ENTER)) {
 			_toCredits = true;
 			_timer = gameTime;
 		}
 	}
-
 }

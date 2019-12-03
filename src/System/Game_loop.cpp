@@ -5,7 +5,7 @@ using namespace GunFight;
 namespace GunFight {
 	Game_loop::Game_loop() {
 		_screen = new Screen();
-		InitWindow(_screen->getResolutionWidth(), _screen->getResolutionHeight(), "Bratva's Wrath");
+		InitWindow(_screen->getResolutionWidth(), _screen->getResolutionHeight(), "Gun Fight!");
 		InitAudioDevice();
 		_gameState = onMenu;
 		_gameOn = true;
@@ -31,7 +31,7 @@ namespace GunFight {
 	}
 
 	void Game_loop::game_loop() {
-		while (_gameOn && !WindowShouldClose()) {
+		while (_gameOn || WindowShouldClose()) {
 			_music->updateMusic();
 			switch (_gameState) {
 			case onMenu:
