@@ -22,8 +22,10 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Music\music.cpp" />
     <ClCompile Include="..\src\Objects\Bullet.cpp" />
+    <ClCompile Include="..\src\Objects\Character.cpp" />
     <ClCompile Include="..\src\Objects\Player1.cpp" />
     <ClCompile Include="..\src\Objects\Player2.cpp" />
+    <ClCompile Include="..\src\Objects\Weapon.cpp" />
     <ClCompile Include="..\src\Scenes\Credits.cpp" />
     <ClCompile Include="..\src\Scenes\Gameplay.cpp" />
     <ClCompile Include="..\src\Scenes\Menu.cpp" />
@@ -33,8 +35,10 @@
   <ItemGroup>
     <ClInclude Include="..\src\Music\music.h" />
     <ClInclude Include="..\src\Objects\Bullet.h" />
+    <ClInclude Include="..\src\Objects\Character.h" />
     <ClInclude Include="..\src\Objects\Player1.h" />
     <ClInclude Include="..\src\Objects\Player2.h" />
+    <ClInclude Include="..\src\Objects\Weapon.h" />
     <ClInclude Include="..\src\Scenes\Credits.h" />
     <ClInclude Include="..\src\Scenes\Gameplay.h" />
     <ClInclude Include="..\src\Scenes\Menu.h" />

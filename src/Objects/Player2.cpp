@@ -43,7 +43,7 @@ namespace GunFight {
 		_F3_Up = LoadTexture("../res/assets/img/P2_F3_Up.png");
 		_F3_Mid = LoadTexture("../res/assets/img/P2_F3_Mid.png");
 		_F3_Down = LoadTexture("../res/assets/img/P2_F3_Down.png");
-		_wScream = LoadSound("../res/assets/snd/wScream.ogg");
+		_deathScream = LoadSound("../res/assets/snd/wScream.ogg");
 	}
 
 	Player2::~Player2() {
@@ -61,7 +61,7 @@ namespace GunFight {
 		UnloadTexture(_F3_Up);
 		UnloadTexture(_F3_Mid);
 		UnloadTexture(_F3_Down);
-		UnloadSound(_wScream);
+		UnloadSound(_deathScream);
 	}
 
 	void Player2::setBody(Rectangle body) {
@@ -265,7 +265,7 @@ namespace GunFight {
 					_score = _score + 1;
 					_p2Bullets[i]->setHasScored(true);
 					p1Dies = true;
-					PlaySound(_wScream);
+					PlaySound(_deathScream);
 				}
 				if (!CheckCollisionRecs(_p2Bullets[i]->getBody(), body)) {
 					_p2Bullets[i]->setHasScored(false);

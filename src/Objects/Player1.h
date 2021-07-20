@@ -22,16 +22,12 @@ namespace GunFight {
 		Aim _aim;
 		bool _isDead;
 		bool _isMoving;
-		Texture2D _F1_Up;
-		Texture2D _F1_Mid;
-		Texture2D _F1_Down;
-		Texture2D _F2_Up;
-		Texture2D _F2_Mid;
-		Texture2D _F2_Down;
-		Texture2D _F3_Up;
-		Texture2D _F3_Mid;
-		Texture2D _F3_Down;
-		Sound _wScream;
+		Texture2D _spriteSheet;
+		int _sheetColumns;
+		int _sheetRows;
+		Rectangle _frameRec;
+		float frameTime;
+		Sound _deathScream;
 	public:
 		Player1(float x, float y, float width, float height);
 		~Player1();

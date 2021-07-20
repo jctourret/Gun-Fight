@@ -19,6 +19,9 @@
     <Filter Include="Music">
       <UniqueIdentifier>{b8043879-a53a-4a93-adae-59d223ee31a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Weapons">
+      <UniqueIdentifier>{22e522cc-21d4-47d0-bee9-2c7d2ae68108}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -49,6 +52,12 @@
     <ClCompile Include="..\src\Music\music.cpp">
       <Filter>Music</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Objects\Character.cpp">
+      <Filter>Objects\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Weapon.cpp">
+      <Filter>Objects\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\Game_loop.h">
@@ -77,6 +86,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Music\music.h">
       <Filter>Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Character.h">
+      <Filter>Objects\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Weapon.h">
+      <Filter>Objects\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

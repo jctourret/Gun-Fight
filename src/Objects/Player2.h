@@ -26,7 +26,7 @@ namespace GunFight {
 		Texture2D _F3_Up;
 		Texture2D _F3_Mid;
 		Texture2D _F3_Down;
-		Sound _wScream;
+		Sound _deathScream;
 	public:
 		Player2(float x, float y, float width, float height);
 		~Player2();

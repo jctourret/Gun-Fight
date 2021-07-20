@@ -6,36 +6,36 @@ using namespace GunFight;
 
 namespace GunFight {
 
-	static const int player1PosX = screenWidth / 10;
-	static const int player1PosY = screeenHeight / 2;
-	static const int player2PosX = screenWidth - screenWidth / 10;
-	static const int player2PosY = screeenHeight / 2;
-	static const int p1ScorePosX = 100;
-	static const int p1ScorePosY = 50;
-	static const int p2ScorePosX = 900;
-	static const int p2ScorePosY = 50;
-	static const int reloadingPosX = screenWidth/2;
-	static const int reloadingPosY = 100;
-	static const int timerPosX = screenWidth/2;
-	static const int timerPosY = 50;
-	static const int winTextPosX = screenWidth / 2 - 100;
-	static const int winTextPosY = 200;
-	static const int toCreditsPosX = screenWidth / 3;
-	static const int toCreditsPosy = 400;
-	static const int textFontSize = 40;
+	const int player1PosX = screenWidth / 10;
+	const int player1PosY = screeenHeight / 2;
+	const int player2PosX = screenWidth - screenWidth / 10;
+	const int player2PosY = screeenHeight / 2;
+	const int p1ScorePosX = 100;
+	const int p1ScorePosY = 50;
+	const int p2ScorePosX = 900;
+	const int p2ScorePosY = 50;
+	const int reloadingPosX = screenWidth/2;
+	const int reloadingPosY = 100;
+	const int timerPosX = screenWidth/2;
+	const int timerPosY = 50;
+	const int winTextPosX = screenWidth / 2 - 100;
+	const int winTextPosY = 200;
+	const int toCreditsPosX = screenWidth / 3;
+	const int toCreditsPosy = 400;
+	const int textFontSize = 40;
 
-	static const Color textColor = YELLOW;
+	const Color textColor = YELLOW;
 
-	static bool reloading = false;
+	bool reloading = false;
 
-	static float reloadTimer = 0.0f;
-	static float gameTimer = 0.0f;
+	float reloadTimer = 0.0f;
+	float gameTimer = 0.0f;
 
-	static const float reloadtime = 1.99f;
-	static const float gameTime = 60.0f;
-	static const float playersWidth = 50.0f;
-	static const float playersHeight = 100.0f;
-	static const float maxTreeSpawnHeight = screenWidth - 100;
+	const float reloadtime = 1.99f;
+	const float gameTime = 60.0f;
+	const float playersWidth = 50.0f;
+	const float playersHeight = 100.0f;
+	const float maxTreeSpawnHeight = screenWidth - 100;
 
 	Gameplay::Gameplay() {
 		_gameplayOn = false;

@@ -16,8 +16,6 @@ namespace GunFight {
 	static const float resetP1DeadTime = p1DeadTime;
 	static const float p1AnimTime = 1.0f;
 
-	void runP1AnimTimer();
-
 	Player1::Player1(float x, float y, float width, float height) {
 		_body.x = x;
 		_body.y = y;
@@ -33,16 +31,12 @@ namespace GunFight {
 		_aim = Mid;
 		_isDead = false;
 		_isMoving = false;
-		_F1_Up = LoadTexture("../res/assets/img/P1_F1_Up.png");
-		_F1_Mid = LoadTexture("../res/assets/img/P1_F1_Mid.png");
-		_F1_Down = LoadTexture("../res/assets/img/P1_F1_Down.png");
-		_F2_Up = LoadTexture("../res/assets/img/P1_F2_Up.png");
-		_F2_Mid = LoadTexture("../res/assets/img/P1_F2_Mid.png");
-		_F2_Down = LoadTexture("../res/assets/img/P1_F2_Down.png");
-		_F3_Up = LoadTexture("../res/assets/img/P1_F3_Up.png");
-		_F3_Mid = LoadTexture("../res/assets/img/P1_F3_Mid.png");
-		_F3_Down = LoadTexture("../res/assets/img/P1_F3_Down.png");
-		_wScream = LoadSound("../res/assets/snd/wScream.ogg");
+		_spriteSheet = LoadTexture("../res/assets/img/rightCharacter.png");
+		_sheetColumns = 3;
+		_sheetRows = 3;
+		_frameRec.width = _spriteSheet.width / _sheetColumns;
+		_frameRec.height = _spriteSheet.height / _sheetRows;
+		_deathScream = LoadSound("../res/assets/snd/wScream.ogg");
 	}
 
 	Player1::~Player1() {
@@ -51,16 +45,8 @@ namespace GunFight {
 				delete _p1Bullets[i];
 			}
 		}
-		UnloadTexture(_F1_Up);
-		UnloadTexture(_F1_Mid);
-		UnloadTexture(_F1_Down);
-		UnloadTexture(_F2_Up);
-		UnloadTexture(_F2_Mid);
-		UnloadTexture(_F2_Down);
-		UnloadTexture(_F3_Up);
-		UnloadTexture(_F3_Mid);
-		UnloadTexture(_F3_Down);
-		UnloadSound(_wScream);
+		UnloadTexture(_spriteSheet);
+		UnloadSound(_deathScream);
 	}
 
 	void Player1::setBody(Rectangle body) {
@@ -104,78 +90,45 @@ namespace GunFight {
 	}
 
 	void Player1::draw() {
-		runP1AnimTimer();
+		p1AnimTimer += GetFrameTime();
 		if (!_isDead) {
 			switch (_aim) {
 			case Up:
 				if (_isMoving) {
-					if (p1AnimTimer <= p1AnimTime / 4) {
-						DrawTexture(_F1_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 4 && p1AnimTimer <= p1AnimTime / 2) {
-						DrawTexture(_F2_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 2 && p1AnimTimer <= p1AnimTime - p1AnimTime / 4) {
-						DrawTexture(_F3_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime - p1AnimTime / 4 && p1AnimTimer <= p1AnimTime) {
-						DrawTexture(_F2_Up, _body.x, _body.y, RAYWHITE);
-					}
+
+
 					if (p1AnimTimer > p1AnimTime) {
 						p1AnimTimer = 0.0f;
 					}
 				}
 				else {
-					DrawTexture(_F1_Up, _body.x, _body.y, RAYWHITE);
+					
 				}
 				break;
 			case Mid:
 				if (_isMoving) {
-					if (p1AnimTimer <= p1AnimTime / 4) {
-						DrawTexture(_F1_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 4 && p1AnimTimer <= p1AnimTime / 2) {
-						DrawTexture(_F2_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 2 && p1AnimTimer <= p1AnimTime - p1AnimTime / 4) {
-						DrawTexture(_F3_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime - p1AnimTime / 4 && p1AnimTimer <= p1AnimTime) {
-						DrawTexture(_F2_Mid, _body.x, _body.y, RAYWHITE);
-					}
+					
 					if (p1AnimTimer > p1AnimTime) {
 						p1AnimTimer = 0.0f;
 					}
 				}
 				else {
-					DrawTexture(_F1_Mid, _body.x, _body.y, RAYWHITE);
+					
 				}
 				break;
 			case Down:
 				if (_isMoving) {
-					if (p1AnimTimer <= p1AnimTime / 4) {
-						DrawTexture(_F1_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 4 && p1AnimTimer <= p1AnimTime / 2) {
-						DrawTexture(_F2_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime / 2 && p1AnimTimer <= p1AnimTime - p1AnimTime / 4) {
-						DrawTexture(_F3_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p1AnimTimer > p1AnimTime - p1AnimTime / 4 && p1AnimTimer <= p1AnimTime) {
-						DrawTexture(_F2_Down, _body.x, _body.y, RAYWHITE);
-					}
 					if (p1AnimTimer > p1AnimTime) {
 						p1AnimTimer = 0.0f;
 					}
 				}
 				else {
-					DrawTexture(_F1_Down, _body.x, _body.y, RAYWHITE);
+
 				}
 				break;
 			}
 		}
-		if (_isDead) {
+		else {
 			DrawRectangle(_body.x - _body.height + _body.width, _body.y + _body.height - _body.width, _body.height, _body.width, MAROON);
 			DrawText("YOU GOT ME!", _body.x, _body.y, textFontSize, MAROON);
 		}
@@ -265,7 +218,7 @@ namespace GunFight {
 					_score = _score + 1;
 					_p1Bullets[i]->setHasScored(true);
 					p2Dies = true;
-					PlaySound(_wScream);
+					PlaySound(_deathScream);
 				}
 				if (!CheckCollisionRecs(_p1Bullets[i]->getBody(), body)) {
 					_p1Bullets[i]->setHasScored(false);
@@ -293,9 +246,5 @@ namespace GunFight {
 			}
 		}
 		_bulletsLeft = p1MaxBullets;
-	}
-
-	void runP1AnimTimer() {
-		p1AnimTimer += GetFrameTime();
 	}
 }
