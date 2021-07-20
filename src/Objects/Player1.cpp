@@ -4,21 +4,26 @@
 using namespace GunFight;
 
 namespace GunFight {
-	static const int playerSpeed = 500;
-	static const int textFontSize = 20;
+	
+	int currentFrame = 0;
 
-	static float p1AnimTimer = 0.0f;
-	static float p1DeadTime = 2.0f;
+	float animTimer = 0.0f;
+	float frameTimer = 0.0f;
+	float p1DeadTime = 2.0f;
 
-	static const float bulletAimRate = 0.35f;
-	static const float bulletWidth = 20;
-	static const float bulletHeight = 10;
-	static const float resetP1DeadTime = p1DeadTime;
-	static const float p1AnimTime = 1.0f;
+	const int playerSpeed = 500;
+	const int textFontSize = 20;
 
-	Player1::Player1(float x, float y, float width, float height) {
-		_body.x = x;
-		_body.y = y;
+	const float bulletAimRate = 0.35f;
+	const float bulletWidth = 20;
+	const float bulletHeight = 10;
+	const float resetP1DeadTime = p1DeadTime;
+	const float animTime = 1.0f;
+
+	Player1::Player1(Vector2 pos, float width, float height) {
+		_body.x = pos.x;
+		_body.y = pos.y;
+		_pos = pos;
 		_body.width = width;
 		_body.height = height;
 		for (int i = 0; i < p1MaxBullets; i++) {
@@ -32,10 +37,13 @@ namespace GunFight {
 		_isDead = false;
 		_isMoving = false;
 		_spriteSheet = LoadTexture("../res/assets/img/rightCharacter.png");
-		_sheetColumns = 3;
+		_sheetColumns = 4;
 		_sheetRows = 3;
+		_frameRec.x = 0;
+		_frameRec.y = 0;
 		_frameRec.width = _spriteSheet.width / _sheetColumns;
 		_frameRec.height = _spriteSheet.height / _sheetRows;
+		_frameTime = animTime/_sheetColumns;
 		_deathScream = LoadSound("../res/assets/snd/wScream.ogg");
 	}
 
@@ -90,43 +98,8 @@ namespace GunFight {
 	}
 
 	void Player1::draw() {
-		p1AnimTimer += GetFrameTime();
 		if (!_isDead) {
-			switch (_aim) {
-			case Up:
-				if (_isMoving) {
-
-
-					if (p1AnimTimer > p1AnimTime) {
-						p1AnimTimer = 0.0f;
-					}
-				}
-				else {
-					
-				}
-				break;
-			case Mid:
-				if (_isMoving) {
-					
-					if (p1AnimTimer > p1AnimTime) {
-						p1AnimTimer = 0.0f;
-					}
-				}
-				else {
-					
-				}
-				break;
-			case Down:
-				if (_isMoving) {
-					if (p1AnimTimer > p1AnimTime) {
-						p1AnimTimer = 0.0f;
-					}
-				}
-				else {
-
-				}
-				break;
-			}
+			DrawTextureRec(_spriteSheet,_frameRec,_pos,WHITE);
 		}
 		else {
 			DrawRectangle(_body.x - _body.height + _body.width, _body.y + _body.height - _body.width, _body.height, _body.width, MAROON);
@@ -144,6 +117,8 @@ namespace GunFight {
 
 	void Player1::move() {
 		float time = GetFrameTime();
+		animTimer += time;
+		frameTimer += time;
 		if (IsKeyDown(KEY_W) && _body.y > 0) {
 			_body.y -= playerSpeed * time;
 			_isMoving = true;
@@ -163,6 +138,33 @@ namespace GunFight {
 		if (!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) {
 			_isMoving = false;
 		}
+
+		if (_isMoving) {
+			if (frameTimer > _frameTime)
+			{
+				currentFrame++;
+				_frameRec.x = currentFrame * _frameRec.width;
+				frameTimer = 0.0f;
+			}
+			if (animTimer > animTime) {
+				animTimer = 0.0f;
+			}
+		}
+		else {
+			currentFrame = 0;
+		}
+		switch (_aim) {
+		case Up:
+			_frameRec.y = 0;
+			break;
+		case Mid:
+			_frameRec.y = _frameRec.height;
+			break;
+		case Down:
+			_frameRec.y = _frameRec.height * 2;
+			break;
+		}
+		_pos = { _body.x,_body.y };
 	}
 
 	void Player1::fireBullet() {

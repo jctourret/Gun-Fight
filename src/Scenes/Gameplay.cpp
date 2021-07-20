@@ -6,8 +6,7 @@ using namespace GunFight;
 
 namespace GunFight {
 
-	const int player1PosX = screenWidth / 10;
-	const int player1PosY = screeenHeight / 2;
+	const Vector2 player1Pos = { screenWidth / 10 , screeenHeight / 2 };
 	const int player2PosX = screenWidth - screenWidth / 10;
 	const int player2PosY = screeenHeight / 2;
 	const int p1ScorePosX = 100;
@@ -41,7 +40,7 @@ namespace GunFight {
 		_gameplayOn = false;
 		_toMenu = false;
 		_toCredits = false;
-		_player1 = new Player1(player1PosX, player1PosY, playersWidth, playersHeight);
+		_player1 = new Player1(player1Pos, playersWidth, playersHeight);
 		_player2 = new Player2(player2PosX - playersWidth, player2PosY, playersWidth, playersHeight);
 		_timer = gameTime;
 	}

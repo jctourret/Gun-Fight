@@ -16,6 +16,7 @@ namespace GunFight {
 	class Player1 {
 	private:
 		Rectangle _body;
+		Vector2 _pos;
 		Bullet* _p1Bullets[p1MaxBullets];
 		int _bulletsLeft;
 		int _score;
@@ -26,10 +27,10 @@ namespace GunFight {
 		int _sheetColumns;
 		int _sheetRows;
 		Rectangle _frameRec;
-		float frameTime;
+		float _frameTime;
 		Sound _deathScream;
 	public:
-		Player1(float x, float y, float width, float height);
+		Player1(Vector2 pos, float width, float height);
 		~Player1();
 		void setBody(Rectangle body);
 		void setX(float x);
