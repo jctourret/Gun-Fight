@@ -1,6 +1,7 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 #include "raylib.h"
+#include "Objects/Character.h"
 #include "Objects/Player2.h"
 #include "Objects/Player1.h"
 #include "Objects/Arbol.h"
@@ -13,7 +14,8 @@ namespace GunFight {
 		bool _toCredits;
 		bool _p1wins;
 		bool _p2wins;
-		Player1* _player1;
+		Character* _character;
+		Player* _player1;
 		Player2* _player2;
 		int _timer;
 	public:

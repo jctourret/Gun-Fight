@@ -32,10 +32,10 @@ namespace GunFight {
 
 	void Game_loop::game_loop() {
 		while (_gameOn || WindowShouldClose()) {
-			_music->updateMusic();
 			switch (_gameState) {
 			case onMenu:
 				_menu->run();
+				_music->updateMusic();
 				if (_menu->getToGameplay()) {
 					_gameState = onGameplay;
 					_menu->setToGameplay(false);
@@ -47,6 +47,7 @@ namespace GunFight {
 				break;
 			case onGameplay:
 				_gameplay->run();
+				_music->updateMusic();
 				if (_gameplay->getToMenu()) {
 					_gameState = onMenu;
 					_gameplay->setToMenu(false);
@@ -58,6 +59,7 @@ namespace GunFight {
 				break;
 			case onCredits:
 				_credits->run();
+				_music->updateMusic();
 				if (_credits->getToGameplay()) {
 					_gameState = onGameplay;
 					_credits->setToGameplay(false);

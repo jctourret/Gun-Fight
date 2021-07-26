@@ -15,7 +15,6 @@ namespace GunFight {
 		_speed = bulletSpeed;
 		_direction.x = NULL;
 		_direction.y = NULL;
-		_hasScored = false;
 	}
 
 	Bullet::~Bullet() {
@@ -43,10 +42,6 @@ namespace GunFight {
 
 	void Bullet::setDirectionY(float y) {
 		_direction.y = y;
-	}
-
-	void Bullet::setHasScored(bool hasScored) {
-		_hasScored = hasScored;
 	}
 
 	Rectangle Bullet::getBody() {
@@ -77,8 +72,19 @@ namespace GunFight {
 		return _direction.y;
 	}
 
-	bool Bullet::getHasScored() {
-		return _hasScored;
+	void Bullet::update() {
+		move();
+	}
+
+	void Bullet::move() {
+		float time = GetFrameTime();
+		if (_body.x < screenWidth) {
+			_body.x = (_body.x + _speed * time * _direction.x);
+			_body.y = (_body.y + _speed * time * _direction.y);
+		}
+		if (_body.y > screeenHeight - _body.height || _body.y < 0) {
+			_direction.y = -_direction.y;
+		}
 	}
 
 	void Bullet::draw() {

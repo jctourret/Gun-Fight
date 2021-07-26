@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #include "raylib.h"
+#include "Revolver.h"
+#include "Interfaces/IColisionable.h"
 #include <string>
 
 using namespace std;
@@ -8,28 +10,37 @@ using namespace std;
 namespace GunFight {
 
 
-	extern enum Aim {
-		Up,
-		Mid,
-		Down,
-	};
-
-
-	class Character
+	class Character : IColisionable
 	{
-	private:
+	protected:
 		Rectangle _body;
-		int _bulletsLeft;
-		int _score;
+		Vector2 _pos;
+		Weapon* _currentWeapon;
 		Aim _aim;
+		int _score;
 		bool _isDead;
 		bool _isMoving;
 		Texture2D _spriteSheet;
+		int _sheetColumns;
+		int _sheetRows;
 		Rectangle _frameRec;
+		float _frameTime;
 		Sound _deathScream;
 	public:
-		Character(string sheetPath, string soundPath);
+		Character();
+		Character(string sheetPath, int sheetColumns, int sheetRows);
 		~Character();
+		void setBody(Rectangle body);
+		void setX(float x);
+		void setY(float y);
+		void setWidth(float width);
+		void setHeight(float height);
+		void setScore(int score);
+		virtual void update();
+		virtual void move();
+		virtual void fireWeapon();
+		virtual Rectangle GetBody();
+		void draw();
 	};
 }
 

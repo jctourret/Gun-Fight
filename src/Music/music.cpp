@@ -3,8 +3,8 @@
 using namespace GunFight;
 
 namespace GunFight {
-	static bool musicPlaying = true;
-	static float songVolume = 0.33f;
+	bool musicPlaying = true;
+	float songVolume = 0.33f;
 
 	GameMusic::GameMusic() {
 		_song = LoadMusicStream("../res/assets/snd/8-bit_West.ogg");
@@ -22,6 +22,7 @@ namespace GunFight {
 		musicPlaying = true;
 		ResumeMusicStream(_song);
 	}
+
 	void GameMusic::updateMusic() {
 		if (IsKeyPressed(KEY_M) && musicPlaying == true) {
 			stopMusic();
@@ -30,8 +31,9 @@ namespace GunFight {
 			playMusic();
 		}
 
-		if (musicPlaying == true)
+		if (musicPlaying == true) {
 			UpdateMusicStream(_song);
+		}
 	}
 	void GameMusic::stopMusic() {
 		musicPlaying = false;

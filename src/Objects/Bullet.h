@@ -19,7 +19,6 @@ namespace GunFight {
 		void setSpeed(float speed);
 		void setDirectionX(float x);
 		void setDirectionY(float y);
-		void setHasScored(bool hasScored);
 		Rectangle getBody();
 		float getBodyX();
 		float getBodyY();
@@ -27,8 +26,9 @@ namespace GunFight {
 		float getSpeed();
 		float getDirectionX();
 		float getDirectionY();
-		bool getHasScored();
+		void update();
 		void draw();
+		void move();
 	};
 }
 #endif

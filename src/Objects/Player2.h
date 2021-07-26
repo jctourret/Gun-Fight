@@ -38,13 +38,11 @@ namespace GunFight {
 		void setScore(int score);
 		Rectangle getBody();
 		int getBulletsLeft();
-		int getScore();
 		bool getIsDead();
 		void draw();
 		void move();
 		void fireBullet();
 		void moveBullet();
-		void checkP1BulletCollision(Rectangle body);
 		void die(bool& die);
 		void reload();
 		bool p1Dies = false;

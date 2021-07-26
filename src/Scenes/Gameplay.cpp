@@ -31,21 +31,28 @@ namespace GunFight {
 	float gameTimer = 0.0f;
 
 	const float reloadtime = 1.99f;
-	const float gameTime = 60.0f;
-	const float playersWidth = 50.0f;
-	const float playersHeight = 100.0f;
+	const float gameTime = 3.0f;
 	const float maxTreeSpawnHeight = screenWidth - 100;
 
 	Gameplay::Gameplay() {
 		_gameplayOn = false;
 		_toMenu = false;
 		_toCredits = false;
-		_player1 = new Player1(player1Pos, playersWidth, playersHeight);
-		_player2 = new Player2(player2PosX - playersWidth, player2PosY, playersWidth, playersHeight);
+		_player1 = new Player(player1Pos);
 		_timer = gameTime;
 	}
 
 	Gameplay::~Gameplay() {
+		if (_character != NULL) {
+			delete _character;
+		}
+		if (_player1 != NULL) {
+			delete _player1;
+		}
+		if (_player2 != NULL)
+		{
+			delete _player2;
+		}
 	}
 
 	void Gameplay::setToMenu(bool toMenu) {
@@ -65,68 +72,49 @@ namespace GunFight {
 	}
 
 	void Gameplay::run() {
-		_gameplayOn = true;
-		while (_gameplayOn) {
-			update();
-			draw();
-		}
+		update();
+		draw();
 	}
 
 	void Gameplay::update() {
 		runTimer();
-		if (_gameplayOn) {
-			if (!_player1->getIsDead() && !_player2->getIsDead()) {
-				_player1->fireBullet();
-				_player2->fireBullet();
-				_player1->move();
-				_player2->move();
+		_player1->update();
+		_character->update();
+		if (_player1->getIsDead()) {
+			if (reloadTimer <= reloadtime) {
+				reloading = true;
+				reloadTimer += GetFrameTime();
 			}
-			_player1->moveBullet();
-			_player2->moveBullet();
-			_player1->checkP2BulletCollision(_player2->getBody());
-			_player2->checkP1BulletCollision(_player1->getBody());
-			_player1->die(_player2->p1Dies);
-			_player2->die(_player1->p2Dies);
-			if (_player1->getIsDead() || _player2->getIsDead()) {
-				if (reloadTimer <= reloadtime) {
-					reloading = true;
-					reloadTimer += GetFrameTime();
-				}
-				else {
-					_player1->reload();
-					_player2->reload();
-				}
-			}
-			if (_player1->getBulletsLeft() == 0 && _player2->getBulletsLeft() == 0) {
-				if (reloadTimer <= reloadtime) {
-					reloading = true;
-					reloadTimer += GetFrameTime();
-				}
-				else {
-					_player1->reload();
-					_player2->reload();
-				}
-			}
-			if (_player1->getBulletsLeft() == p1MaxBullets && _player2->getBulletsLeft() == p2MaxBullets) {
-				reloading = false;
-				reloadTimer = 0.0f;
+			else {
+				_player1->reload();
 			}
 		}
+		//if (_player1.) {
+		//	if (reloadTimer <= reloadtime) {
+		//		reloading = true;
+		//		reloadTimer += GetFrameTime();
+		//	}
+		//	else {
+		//		_player1->reload();
+		//		_player2->reload();
+		//	}
+		//}
+		//if (_player1->getBulletsLeft() == p1MaxBullets && _player2->getBulletsLeft() == p2MaxBullets) {
+		//	reloading = false;
+		//	reloadTimer = 0.0f;
+		//}
 	}
 
 	void Gameplay::draw() {
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawText(FormatText("SCORE: %i", _player1->getScore()), p1ScorePosX, p1ScorePosY, textFontSize, textColor);
-		DrawText(FormatText("SCORE: %i", _player2->getScore()), p2ScorePosX, p2ScorePosY, textFontSize, textColor);
 		DrawText(FormatText("%i", _timer), timerPosX, timerPosY, textFontSize, textColor);
-		if (_gameplayOn) {
-			_player1->draw();
-			_player2->draw();
-			if (reloading) {
-				DrawText("Reload!", reloadingPosX, reloadingPosY, textFontSize, textColor);
-			}
+		_player1->draw();
+		if (reloading) {
+			DrawText("Reload!", reloadingPosX, reloadingPosY, textFontSize, textColor);
 		}
+
 		if (_p1wins) {
 			DrawText("Player 1 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
 			DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
@@ -152,12 +140,7 @@ namespace GunFight {
 	}
 
 	void Gameplay::checkWinner() {
-		if (_player1->getScore() > _player2->getScore()) {
-			_p1wins = true;
-		}
-		if (_player2->getScore() > _player1->getScore()) {
-			_p2wins = true;
-		}
+		
 	}
 
 	void Gameplay::toCredits() {

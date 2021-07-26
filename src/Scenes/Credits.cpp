@@ -30,11 +30,8 @@ namespace GunFight {
 	}
 
 	void Credits::run() {
-		_creditsOn = true;
-		while (_creditsOn) {
-			update();
-			draw();
-		}
+		update();
+		draw();
 	}
 
 	void Credits::update() {

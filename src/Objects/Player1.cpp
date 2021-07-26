@@ -14,26 +14,22 @@ namespace GunFight {
 	const int playerSpeed = 500;
 	const int textFontSize = 20;
 
-	const float bulletAimRate = 0.35f;
+	const float playerWidth = 50.0f;
+	const float playerHeight = 100.0f;
+	const float halfFireArc = 0.35f;
 	const float bulletWidth = 20;
 	const float bulletHeight = 10;
 	const float resetP1DeadTime = p1DeadTime;
 	const float animTime = 1.0f;
 
-	Player1::Player1(Vector2 pos, float width, float height) {
+	Player::Player(Vector2 pos) : Character() {
 		_body.x = pos.x;
 		_body.y = pos.y;
 		_pos = pos;
-		_body.width = width;
-		_body.height = height;
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				_p1Bullets[i] = NULL;
-			}
-		}
-		_bulletsLeft = p1MaxBullets;
+		_body.width = playerWidth;
+		_body.height = playerHeight;
 		_score = NULL;
-		_aim = Mid;
+		_currentWeapon = new Revolver();
 		_isDead = false;
 		_isMoving = false;
 		_spriteSheet = LoadTexture("../res/assets/img/rightCharacter.png");
@@ -47,75 +43,44 @@ namespace GunFight {
 		_deathScream = LoadSound("../res/assets/snd/wScream.ogg");
 	}
 
-	Player1::~Player1() {
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				delete _p1Bullets[i];
-			}
-		}
+	Player::~Player() {
 		UnloadTexture(_spriteSheet);
 		UnloadSound(_deathScream);
 	}
 
-	void Player1::setBody(Rectangle body) {
-		_body = body;
-	}
-
-	void Player1::setX(float x) {
-		_body.x = x;
-	}
-
-	void Player1::setY(float y) {
-		_body.y = y;
-	}
-
-	void Player1::setWidth(float width) {
-		_body.width = width;
-	}
-
-	void Player1::setHeight(float height) {
-		_body.height = height;
-	}
-
-	void Player1::setScore(int score) {
-		_score = score;
-	}
-
-	Rectangle Player1::getBody() {
+	Rectangle Player::getBody() {
 		return _body;
 	}
 
-	int Player1::getBulletsLeft() {
-		return _bulletsLeft;
-	}
-
-	int Player1::getScore() {
+	int Player::getScore() {
 		return _score;
 	}
 
-	bool Player1::getIsDead() {
+	bool Player::getIsDead() {
 		return _isDead;
 	}
 
-	void Player1::draw() {
+	void Player::update() {
+		if (!getIsDead()) {
+			move();
+			updateAnimation();
+			fireWeapon();
+			updateWeapon();
+		}
+	}
+
+	void Player::draw() {
 		if (!_isDead) {
 			DrawTextureRec(_spriteSheet,_frameRec,_pos,WHITE);
+			_currentWeapon->draw();
 		}
 		else {
 			DrawRectangle(_body.x - _body.height + _body.width, _body.y + _body.height - _body.width, _body.height, _body.width, MAROON);
 			DrawText("YOU GOT ME!", _body.x, _body.y, textFontSize, MAROON);
 		}
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				_p1Bullets[i]->draw();
-			}
-		}
-		for (int i = 0; i < _bulletsLeft; i++) {
-			DrawRectangle(screenWidth / 20 + (i*(bulletHeight * 2)), screeenHeight - screeenHeight / 20 - bulletWidth, bulletHeight, bulletWidth, RAYWHITE);
-		}
 	}
 
-	void Player1::move() {
+	void Player::move() {
 		float time = GetFrameTime();
 		animTimer += time;
 		frameTimer += time;
@@ -138,7 +103,10 @@ namespace GunFight {
 		if (!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S) && !IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)) {
 			_isMoving = false;
 		}
+		_pos = { _body.x,_body.y };
+	}
 
+	void Player::updateAnimation() {
 		if (_isMoving) {
 			if (frameTimer > _frameTime)
 			{
@@ -148,12 +116,14 @@ namespace GunFight {
 			}
 			if (animTimer > animTime) {
 				animTimer = 0.0f;
+				currentFrame = 0;
 			}
 		}
 		else {
 			currentFrame = 0;
 		}
-		switch (_aim) {
+		switch (_aim)
+		{
 		case Up:
 			_frameRec.y = 0;
 			break;
@@ -161,75 +131,37 @@ namespace GunFight {
 			_frameRec.y = _frameRec.height;
 			break;
 		case Down:
-			_frameRec.y = _frameRec.height * 2;
+			_frameRec.y = _frameRec.height*2;
+			break;
+		default:
 			break;
 		}
-		_pos = { _body.x,_body.y };
 	}
 
-	void Player1::fireBullet() {
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] == NULL) {
-				if (IsKeyPressed(KEY_J)) {
-					_p1Bullets[i] = new Bullet(_body.x + _body.width, _body.y + (_body.height / 2), bulletWidth, bulletHeight);
-					_p1Bullets[i]->setDirectionX(1 - bulletAimRate);
-					_p1Bullets[i]->setDirectionY((-1 * bulletAimRate));
-					_bulletsLeft--;
-					_aim = Up;
-					break;
-				}
-				if (IsKeyPressed(KEY_K)) {
-					_p1Bullets[i] = new Bullet(_body.x + _body.width, _body.y + (_body.height / 2), bulletWidth, bulletHeight);
-					_p1Bullets[i]->setDirectionX(1);
-					_p1Bullets[i]->setDirectionY(0);
-					_bulletsLeft--;
-					_aim = Mid;
-					break;
-				}
-				if (IsKeyPressed(KEY_L)) {
-					_p1Bullets[i] = new Bullet(_body.x + _body.width, _body.y + (_body.height / 2), bulletWidth, bulletHeight);
-					_p1Bullets[i]->setDirectionX(1 - bulletAimRate);
-					_p1Bullets[i]->setDirectionY(bulletAimRate);
-					_bulletsLeft--;
-					_aim = Down;
-					break;
-				}
-			}
+	void Player::fireWeapon() {
+		Vector2 direction;
+		if (IsKeyPressed(KEY_J)) {
+			_aim = Up;
+			direction = {1-halfFireArc,-halfFireArc};
+			_currentWeapon->fireBullet(_body,direction);
+		}
+		if (IsKeyPressed(KEY_K)) {
+			_aim = Mid;
+			direction = {1,0};
+			_currentWeapon->fireBullet(_body, direction);
+		}
+		if (IsKeyPressed(KEY_L)) {
+			_aim = Down;
+			direction = {1-halfFireArc,halfFireArc};
+			_currentWeapon->fireBullet(_body, direction);
 		}
 	}
 
-	void Player1::moveBullet() {
-		float time = GetFrameTime();
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				if (_p1Bullets[i]->getBodyX() < screenWidth) {
-					_p1Bullets[i]->setBodyX(_p1Bullets[i]->getBodyX() + ((_p1Bullets[i]->getSpeed() * time) * _p1Bullets[i]->getDirectionX()));
-					_p1Bullets[i]->setBodyY(_p1Bullets[i]->getBodyY() + ((_p1Bullets[i]->getSpeed() * time) * _p1Bullets[i]->getDirectionY()));
-				}
-				if (_p1Bullets[i]->getBodyY() > screeenHeight - _p1Bullets[i]->getBodyHeight() || _p1Bullets[i]->getBodyY() < 0) {
-					_p1Bullets[i]->setDirectionY(-1 * (_p1Bullets[i]->getDirectionY()));
-				}
-			}
-		}
+	void Player::updateWeapon() {
+		_currentWeapon->update();
 	}
 
-	void Player1::checkP2BulletCollision(Rectangle body) {
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				if (CheckCollisionRecs(_p1Bullets[i]->getBody(), body) && !_p1Bullets[i]->getHasScored() && !p2Dies) {
-					_score = _score + 1;
-					_p1Bullets[i]->setHasScored(true);
-					p2Dies = true;
-					PlaySound(_deathScream);
-				}
-				if (!CheckCollisionRecs(_p1Bullets[i]->getBody(), body)) {
-					_p1Bullets[i]->setHasScored(false);
-				}
-			}
-		}
-	}
-
-	void Player1::die(bool& die) {
+	void Player::die(bool& die) {
 		if (die) {
 			_isDead = true;
 			p1DeadTime -= GetFrameTime();
@@ -241,12 +173,6 @@ namespace GunFight {
 		}
 	}
 
-	void Player1::reload() {
-		for (int i = 0; i < p1MaxBullets; i++) {
-			if (_p1Bullets[i] != NULL) {
-				_p1Bullets[i] = NULL;
-			}
-		}
-		_bulletsLeft = p1MaxBullets;
+	void Player::reload() {
 	}
 }

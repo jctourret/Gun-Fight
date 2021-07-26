@@ -50,11 +50,8 @@ namespace GunFight {
 	}
 
 	void Menu::run() {
-		_menuOn = true;
-		while (_menuOn) {
-			update();
-			draw();
-		}
+		update();
+		draw();
 	}
 
 	void Menu::update() {

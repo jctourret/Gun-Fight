@@ -96,98 +96,12 @@ namespace GunFight {
 		return _bulletsLeft;
 	}
 
-	int Player2::getScore() {
-		return _score;
-	}
-
 	bool Player2::getIsDead() {
 		return _isDead;
 	}
 
 	void Player2::draw() {
-		for (int i = 0; i < p2MaxBullets; i++) {
-			if (_p2Bullets[i] != NULL) {
-				_p2Bullets[i]->draw();
-			}
-		}
-		runP2AnimTimer();
-		if (!_isDead) {
-			switch (_aim) {
-			case Up:
-				if (_isMoving) {
-					if (p2AnimTimer <= p2AnimTime / 4) {
-						DrawTexture(_F1_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 4 && p2AnimTimer <= p2AnimTime / 2) {
-						DrawTexture(_F2_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 2 && p2AnimTimer <= p2AnimTime - p2AnimTime / 4) {
-						DrawTexture(_F3_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime - p2AnimTime / 4 && p2AnimTimer <= p2AnimTime) {
-						DrawTexture(_F2_Up, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime) {
-						p2AnimTimer = 0.0f;
-					}
-				}
-				else {
-					DrawTexture(_F1_Up, _body.x, _body.y, RAYWHITE);
-				}
-				break;
-			case Mid:
-				if (_isMoving) {
-					if (p2AnimTimer <= p2AnimTime / 4) {
-						DrawTexture(_F1_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 4 && p2AnimTimer <= p2AnimTime / 2) {
-						DrawTexture(_F2_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 2 && p2AnimTimer <= p2AnimTime - p2AnimTime / 4) {
-						DrawTexture(_F3_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime - p2AnimTime / 4 && p2AnimTimer <= p2AnimTime) {
-						DrawTexture(_F2_Mid, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime) {
-						p2AnimTimer = 0.0f;
-					}
-				}
-				else {
-					DrawTexture(_F1_Mid, _body.x, _body.y, RAYWHITE);
-				}
-				break;
-			case Down:
-				if (_isMoving) {
-					if (p2AnimTimer <= p2AnimTime / 4) {
-						DrawTexture(_F1_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 4 && p2AnimTimer <= p2AnimTime / 2) {
-						DrawTexture(_F2_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime / 2 && p2AnimTimer <= p2AnimTime - p2AnimTime / 4) {
-						DrawTexture(_F3_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime - p2AnimTime / 4 && p2AnimTimer <= p2AnimTime) {
-						DrawTexture(_F2_Down, _body.x, _body.y, RAYWHITE);
-					}
-					if (p2AnimTimer > p2AnimTime) {
-						p2AnimTimer = 0.0f;
-					}
-				}
-				else {
-					DrawTexture(_F1_Down, _body.x, _body.y, RAYWHITE);
-				}
-				break;
-			}
-		}
-		if (_isDead) {
-			DrawRectangle(_body.x, _body.y + _body.height - _body.width, _body.height, _body.width, MAROON);
-			DrawText("YOU GOT ME!", _body.x, _body.y, textFontSize, MAROON);
-		}
-		for (int i = 0; i < _bulletsLeft; i++) {
-			DrawRectangle(screenWidth - (screenWidth / 20 + (i*(bulletHeight * 2))), screeenHeight - screeenHeight / 20 - bulletWidth, bulletHeight, bulletWidth, RAYWHITE);
-		}
+	
 	}
 
 	void Player2::move() {
@@ -254,21 +168,6 @@ namespace GunFight {
 				}
 				if (_p2Bullets[i]->getBodyY() > screeenHeight - _p2Bullets[i]->getBodyHeight() || _p2Bullets[i]->getBodyY() < 0) {
 					_p2Bullets[i]->setDirectionY(-1 * (_p2Bullets[i]->getDirectionY()));
-				}
-			}
-		}
-	}
-	void Player2::checkP1BulletCollision(Rectangle body) {
-		for (int i = 0; i < p2MaxBullets; i++) {
-			if (_p2Bullets[i] != NULL && !_isDead) {
-				if (CheckCollisionRecs(_p2Bullets[i]->getBody(), body) && !_p2Bullets[i]->getHasScored() && !p1Dies) {
-					_score = _score + 1;
-					_p2Bullets[i]->setHasScored(true);
-					p1Dies = true;
-					PlaySound(_deathScream);
-				}
-				if (!CheckCollisionRecs(_p2Bullets[i]->getBody(), body)) {
-					_p2Bullets[i]->setHasScored(false);
 				}
 			}
 		}
