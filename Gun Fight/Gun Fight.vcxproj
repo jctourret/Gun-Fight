@@ -32,6 +32,7 @@
     <ClCompile Include="..\src\Scenes\Credits.cpp" />
     <ClCompile Include="..\src\Scenes\Gameplay.cpp" />
     <ClCompile Include="..\src\Scenes\Menu.cpp" />
+    <ClCompile Include="..\src\System\Animation.cpp" />
     <ClCompile Include="..\src\System\ColisionManager.cpp" />
     <ClCompile Include="..\src\System\Game_loop.cpp" />
     <ClCompile Include="..\src\System\Screen.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="..\src\Scenes\Credits.h" />
     <ClInclude Include="..\src\Scenes\Gameplay.h" />
     <ClInclude Include="..\src\Scenes\Menu.h" />
+    <ClInclude Include="..\src\System\Animation.h" />
     <ClInclude Include="..\src\System\ColisionManager.h" />
     <ClInclude Include="..\src\System\Game_loop.h" />
     <ClInclude Include="..\src\System\Screen.h" />

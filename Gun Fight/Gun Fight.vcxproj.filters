@@ -73,6 +73,9 @@
     <ClCompile Include="..\src\System\ColisionManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\System\Animation.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\Game_loop.h">
@@ -118,6 +121,9 @@
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\src\System\ColisionManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\Animation.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>

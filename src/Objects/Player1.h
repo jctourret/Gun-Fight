@@ -1,5 +1,5 @@
-#ifndef PLAYER1_H
-#define PLAYER1_H
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "raylib.h"
 #include "Interfaces/IColisionable.h"
 #include "Character.h"
@@ -9,7 +9,7 @@ namespace GunFight {
 	class Player : public Character
 	{
 	public:
-		Player(Vector2 pos, string texturePath);
+		Player(string tag,  Vector2 pos, string texturePath, int sheetColumns, int sheetRows);
 		~Player();
 		Rectangle getBody();
 		int getScore();

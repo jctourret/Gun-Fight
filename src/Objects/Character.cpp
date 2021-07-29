@@ -10,7 +10,7 @@ namespace GunFight {
 	const float charWidth = 50.0f;
 	const float charHeight = 100.0f;
 
-	Character::Character(Vector2 pos, string sheetPath) {
+	Character::Character(Vector2 pos, string sheetPath, int sheetColumns, int sheetRows) {
 		_body.x = pos.x;
 		_body.y = pos.y;
 		_pos = pos;

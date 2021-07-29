@@ -1,10 +1,10 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
+#include "System/Animation.h"
 #include "Revolver.h"
 #include "Interfaces/IColisionable.h"
 
 namespace GunFight {
-
 
 	class Character : public IColisionable
 	{
@@ -12,6 +12,7 @@ namespace GunFight {
 		string _tag;
 		Rectangle _body;
 		Vector2 _pos;
+		vector<Animation*> animations;
 		Weapon* _currentWeapon;
 		Aim _aim;
 		int _score;
@@ -22,8 +23,7 @@ namespace GunFight {
 		float _frameTime;
 		Sound _deathScream;
 	public:
-		Character();
-		Character(Vector2 pos, string sheetPath);
+		Character(Vector2 pos, string sheetPath, int sheetColumns, int sheetRows);
 		~Character();
 		void setBody(Rectangle body);
 		void setX(float x);

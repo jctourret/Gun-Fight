@@ -7,8 +7,7 @@ using namespace GunFight;
 namespace GunFight {
 
 	const Vector2 player1Pos = { screenWidth / 10 , screeenHeight / 2 };
-	const int player2PosX = screenWidth - screenWidth / 10;
-	const int player2PosY = screeenHeight / 2;
+	const Vector2 player2Pos = { screenWidth - screenWidth / 1,screeenHeight / 2 };
 	const int p1ScorePosX = 100;
 	const int p1ScorePosY = 50;
 	const int p2ScorePosX = 900;
@@ -38,7 +37,8 @@ namespace GunFight {
 		_gameplayOn = false;
 		_toMenu = false;
 		_toCredits = false;
-		_player1 = new Player(player1Pos);
+		_player1 = new Player("Player1", player1Pos,"../res/assets/img/rightCharacter.png",4,3);
+		_player2 = new Player("Player2", player2);
 		_timer = gameTime;
 	}
 
@@ -72,15 +72,15 @@ namespace GunFight {
 	void Gameplay::update() {
 		runTimer();
 		_player1->update();
-		if (_player1->getIsDead()) {
-			if (reloadTimer <= reloadtime) {
-				reloading = true;
-				reloadTimer += GetFrameTime();
-			}
-			else {
-				_player1->reload();
-			}
-		}
+		//if (_player1->getIsDead()) {
+		//	if (reloadTimer <= reloadtime) {
+		//		reloading = true;
+		//		reloadTimer += GetFrameTime();
+		//	}
+		//	else {
+		//		_player1->reload();
+		//	}
+		//}
 		//if (_player1.) {
 		//	if (reloadTimer <= reloadtime) {
 		//		reloading = true;
