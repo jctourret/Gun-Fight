@@ -1,25 +1,20 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-#include "raylib.h"
 #include "Revolver.h"
 #include "Interfaces/IColisionable.h"
-#include <string>
-
-using namespace std;
 
 namespace GunFight {
 
 
-	class Character : IColisionable
+	class Character : public IColisionable
 	{
 	protected:
+		string _tag;
 		Rectangle _body;
 		Vector2 _pos;
 		Weapon* _currentWeapon;
 		Aim _aim;
 		int _score;
-		bool _isDead;
-		bool _isMoving;
 		Texture2D _spriteSheet;
 		int _sheetColumns;
 		int _sheetRows;
@@ -28,7 +23,7 @@ namespace GunFight {
 		Sound _deathScream;
 	public:
 		Character();
-		Character(string sheetPath, int sheetColumns, int sheetRows);
+		Character(Vector2 pos, string sheetPath);
 		~Character();
 		void setBody(Rectangle body);
 		void setX(float x);
@@ -39,10 +34,14 @@ namespace GunFight {
 		virtual void update();
 		virtual void move();
 		virtual void fireWeapon();
-		virtual Rectangle GetBody();
 		void draw();
+		Rectangle GetBody() override;
+		string GetTag() override;
+		virtual void OnCollisionStay(std::shared_ptr<IColisionable> other) = 0;
+		virtual void OnCollisionEnter(std::shared_ptr<IColisionable> other) = 0;
+		virtual void OnCollisionExit(std::shared_ptr<IColisionable> other) = 0;
 	};
 }
 
 
-#endif // !1
+#endif

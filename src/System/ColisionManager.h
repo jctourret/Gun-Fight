@@ -1,51 +1,27 @@
 #pragma once
 #include "Interfaces/IColisionable.h"
 #include "raylib.h"
+#include <memory>
 #include <list>
 
 using namespace std;
 
 namespace GunFight {
+    
+    struct ColisionRegister {
+        shared_ptr<IColisionable> colisioner;
+        shared_ptr<IColisionable> otherColisioner;
+    };
+    
     class ColisionManager
     {
-        list<IColisionable>* colisionables;
-        ColisionManager()
-        {
-            colisionables = new list<IColisionable>();
-        }
-        void AddToCollisionManager(IColisionable colisionable)
-        {
-            colisionables->push_back(colisionable);
-        }
-        void RemoveFromCollisionManager(IColisionable colisionable)
-        {
-            list<IColisionable>::iterator it;
+        list<ColisionRegister> colRegister;
+        list<shared_ptr<IColisionable>> colisionables;
 
-            it = find(colisionables->begin(), colisionables->end(), colisionable);
-
-            if (it != colisionables->end())
-            {
-                colisionables->remove(colisionable);
-            }
-        }
-        void CheckCollisions()
-        {
-            list<IColisionable>::iterator firstIterator;
-            list<IColisionable>::iterator secondIterator;
-
-            for (firstIterator = colisionables->begin(); firstIterator != colisionables->end(); firstIterator++)
-            {
-                for (secondIterator = colisionables->begin(); secondIterator != colisionables->end(); secondIterator++)
-                {
-                    if (firstIterator != secondIterator)
-                    {
-                        if (CheckCollisionRecs(firstIterator->GetBody(), secondIterator->GetBody()))
-                        {
-
-                        }
-                    }
-                }
-            }
-        }
+    public:
+        ColisionManager();
+        void AddToCollisionManager(shared_ptr<IColisionable>& colisionable);
+        void RemoveFromCollisionManager(shared_ptr<IColisionable>& colisionable);
+        void CheckCollisions();
     };
 }

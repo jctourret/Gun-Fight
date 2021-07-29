@@ -7,7 +7,7 @@ using namespace std;
 
 namespace GunFight
 {
-	enum Aim {
+	enum class Aim {
 		Up,
 		Mid,
 		Down,

@@ -7,28 +7,23 @@ namespace GunFight {
 
 	int textFontSize = 18;
 
-	Character::Character() {
+	const float charWidth = 50.0f;
+	const float charHeight = 100.0f;
 
-	}
-
-	Character::Character(string sheetPath, int sheetColumns, int sheetRows) {
-		_body.x = 0;
-		_body.y = 0;
-		_pos = {0.0f,0.0f};
-		_body.width = 500;
-		_body.height = 500;
-		_currentWeapon = new Weapon();
+	Character::Character(Vector2 pos, string sheetPath) {
+		_body.x = pos.x;
+		_body.y = pos.y;
+		_pos = pos;
+		_body.width = charWidth;
+		_body.height = charHeight;
+		_currentWeapon = new Revolver();
+		_aim = GunFight::Aim::Mid;
 		_score = 0;
-		_isDead = false;
-		_isMoving = false;
+		_sheetColumns = NULL;
+		_sheetRows = NULL;
+		_frameRec = { 0.0f,0.0f,0.0f,0.0f };
+		_frameTime = 0;
 		_spriteSheet = LoadTexture(sheetPath.c_str());
-		_sheetColumns = sheetColumns;
-		_sheetRows = sheetRows;
-		_frameRec.x = 0;
-		_frameRec.y = 0;
-		_frameRec.width = (float)_spriteSheet.width / _sheetColumns;
-		_frameRec.height = (float)_spriteSheet.height / _sheetRows;
-		_frameTime = (float) animTime / _sheetColumns;
 		_deathScream = LoadSound("../res/assets/snd/wScream.ogg");
 	}
 	Character::~Character() {
@@ -64,13 +59,7 @@ namespace GunFight {
 	}
 
 	void Character::draw() {
-		if (!_isDead) {
-			DrawTextureRec(_spriteSheet, _frameRec, _pos, WHITE);
-		}
-		else {
-			DrawRectangle((int)(_body.x - _body.height + _body.width), (int)(_body.y + _body.height - _body.width), (int)_body.height, (int)_body.width, MAROON);
-			DrawText("YOU GOT ME!", (int)_body.x, (int)_body.y, textFontSize, MAROON);
-		}
+		DrawTextureRec(_spriteSheet, _frameRec, _pos, WHITE);
 	}
 
 	void Character::move() {
@@ -81,5 +70,14 @@ namespace GunFight {
 
 	}
 
+	Rectangle Character::GetBody() {
+		return _body;
+	}
 	
+	string Character::GetTag()
+	{
+		return _tag;
+	}
+
+
 }

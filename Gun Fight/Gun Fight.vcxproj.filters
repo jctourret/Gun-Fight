@@ -22,6 +22,9 @@
     <Filter Include="Objects\Weapons">
       <UniqueIdentifier>{22e522cc-21d4-47d0-bee9-2c7d2ae68108}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{5d73907d-df76-4e49-9994-c48962f11183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -58,6 +61,18 @@
     <ClCompile Include="..\src\Objects\Weapon.cpp">
       <Filter>Objects\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Objects\Revolver.cpp">
+      <Filter>Objects\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Shotgun.cpp">
+      <Filter>Objects\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Interfaces\IColisionable.cpp">
+      <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\System\ColisionManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\Game_loop.h">
@@ -92,6 +107,18 @@
     </ClInclude>
     <ClInclude Include="..\src\Objects\Weapon.h">
       <Filter>Objects\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Revolver.h">
+      <Filter>Objects\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Shotgun.h">
+      <Filter>Objects\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Interfaces\IColisionable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\System\ColisionManager.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

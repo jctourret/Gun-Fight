@@ -31,7 +31,7 @@ namespace GunFight {
 	float gameTimer = 0.0f;
 
 	const float reloadtime = 1.99f;
-	const float gameTime = 3.0f;
+	const float gameTime = 60.0f;
 	const float maxTreeSpawnHeight = screenWidth - 100;
 
 	Gameplay::Gameplay() {
@@ -43,15 +43,8 @@ namespace GunFight {
 	}
 
 	Gameplay::~Gameplay() {
-		if (_character != NULL) {
-			delete _character;
-		}
 		if (_player1 != NULL) {
 			delete _player1;
-		}
-		if (_player2 != NULL)
-		{
-			delete _player2;
 		}
 	}
 
@@ -79,7 +72,6 @@ namespace GunFight {
 	void Gameplay::update() {
 		runTimer();
 		_player1->update();
-		_character->update();
 		if (_player1->getIsDead()) {
 			if (reloadTimer <= reloadtime) {
 				reloading = true;
@@ -115,14 +107,14 @@ namespace GunFight {
 			DrawText("Reload!", reloadingPosX, reloadingPosY, textFontSize, textColor);
 		}
 
-		if (_p1wins) {
-			DrawText("Player 1 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
-			DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
-		}
-		if (_p2wins) {
-			DrawText("Player 2 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
-			DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
-		}
+		//if (_p1wins) {
+		//	DrawText("Player 1 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
+		//	DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
+		//}
+		//if (_p2wins) {
+		//	DrawText("Player 2 Wins!", winTextPosX, winTextPosY, textFontSize, textColor);
+		//	DrawText("Press enter to go to credits.", toCreditsPosX, toCreditsPosy, textFontSize, textColor);
+		//}
 		EndDrawing();
 	}
 

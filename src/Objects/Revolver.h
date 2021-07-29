@@ -5,7 +5,6 @@ namespace GunFight {
 
 	class Revolver : public Weapon
 	{
-
 	public:
 		Revolver();
 		~Revolver();
