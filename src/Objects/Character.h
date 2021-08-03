@@ -2,6 +2,7 @@
 #define CHARACTER_H
 #include "System/Animation.h"
 #include "Revolver.h"
+#include "Shotgun.h"
 #include "Interfaces/IColisionable.h"
 
 namespace GunFight {
@@ -10,38 +11,40 @@ namespace GunFight {
 	{
 	protected:
 		string _tag;
-		Rectangle _body;
-		Vector2 _pos;
-		vector<Animation*> animations;
 		Weapon* _currentWeapon;
 		Aim _aim;
-		int _score;
+		Rectangle _body;
+		Rectangle _frameRec;
+		Rectangle _deathFrameRec;
+		Vector2 _pos;
 		Texture2D _spriteSheet;
+		Texture2D _deathSheet;
+		Sound _deathScream;
 		int _sheetColumns;
 		int _sheetRows;
-		Rectangle _frameRec;
 		float _frameTime;
-		Sound _deathScream;
+		bool _isDead;
 	public:
-		Character(Vector2 pos, string sheetPath, int sheetColumns, int sheetRows);
+		Character(Vector2 pos, string sheetPath, string deathPath, int sheetColumns, int sheetRows);
 		~Character();
-		void setBody(Rectangle body);
-		void setX(float x);
-		void setY(float y);
-		void setWidth(float width);
-		void setHeight(float height);
-		void setScore(int score);
-		virtual void update();
-		virtual void move();
-		virtual void fireWeapon();
-		void draw();
+		Weapon* GetWeapon();
+		bool GetIsDead();
+		void SetBody(Rectangle body);
+		void SetX(float x);
+		void SetY(float y);
+		void SetWidth(float width);
+		void SetHeight(float height);
+		void SetCurrentWeapon(Weapon* weapon);
+		void SetIsDead(bool isDead);
+		virtual void Update();
+		virtual void Move();
+		virtual void FireWeapon();
+		virtual void Draw();
 		Rectangle GetBody() override;
 		string GetTag() override;
-		virtual void OnCollisionStay(std::shared_ptr<IColisionable> other) = 0;
-		virtual void OnCollisionEnter(std::shared_ptr<IColisionable> other) = 0;
-		virtual void OnCollisionExit(std::shared_ptr<IColisionable> other) = 0;
+		virtual void OnCollisionStay(IColisionable* other);
+		virtual void OnCollisionEnter(IColisionable* other);
+		virtual void OnCollisionExit(IColisionable* other);
 	};
 }
-
-
 #endif

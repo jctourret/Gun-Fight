@@ -6,6 +6,6 @@ namespace GunFight {
 
 	public:
 		Shotgun();
-		virtual void fireBullet(Rectangle body, Vector2 direction);
+		virtual void FireBullet(Vector2 shootPosition, Vector2 direction);
 	};
 }

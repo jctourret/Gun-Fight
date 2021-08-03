@@ -2,26 +2,25 @@
 #include "Interfaces/IColisionable.h"
 #include "raylib.h"
 #include <memory>
-#include <list>
 
 using namespace std;
 
 namespace GunFight {
     
     struct ColisionRegister {
-        shared_ptr<IColisionable> colisioner;
-        shared_ptr<IColisionable> otherColisioner;
+        vector<IColisionable*> colisioner;
+        vector<IColisionable*> otherColisioner;
     };
     
     class ColisionManager
     {
-        list<ColisionRegister> colRegister;
-        list<shared_ptr<IColisionable>> colisionables;
+        ColisionRegister colRegister;
+        vector<IColisionable*> colisionables;
 
     public:
         ColisionManager();
-        void AddToCollisionManager(shared_ptr<IColisionable>& colisionable);
-        void RemoveFromCollisionManager(shared_ptr<IColisionable>& colisionable);
+        void AddToCollisionManager(IColisionable* colisionable);
+        void RemoveFromCollisionManager(IColisionable* colisionable);
         void CheckCollisions();
     };
 }

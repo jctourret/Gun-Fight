@@ -7,7 +7,7 @@ namespace GunFight {
 	float songVolume = 0.33f;
 
 	GameMusic::GameMusic() {
-		_song = LoadMusicStream("../res/assets/snd/8-bit_West.ogg");
+		_song = LoadMusicStream("res/assets/snd/8-bit_West.ogg");
 		PlayMusicStream(_song);
 		SetMusicVolume(_song, songVolume);
 	}

@@ -7,7 +7,7 @@ void main() {
 	Game_loop* play = NULL;
 	play = new Game_loop;
 	if (play != NULL)
-		play->game_loop();
+		play->GameLoop();
 	if (play != NULL)
 		delete play;
 }

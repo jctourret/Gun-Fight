@@ -5,9 +5,9 @@ using namespace GunFight;
 namespace GunFight {
 	Game_loop::Game_loop() {
 		_screen = new Screen();
-		InitWindow(_screen->getResolutionWidth(), _screen->getResolutionHeight(), "Gun Fight!");
+		InitWindow(_screen->GetResolutionWidth(), _screen->GetResolutionHeight(), "Gun Fight!");
 		InitAudioDevice();
-		_gameState = onMenu;
+		_gameState = Gamestate::onMenu;
 		_gameOn = true;
 		_menu = NULL;
 		_gameplay = NULL;
@@ -30,43 +30,43 @@ namespace GunFight {
 		}
 	}
 
-	void Game_loop::game_loop() {
-		while (_gameOn || WindowShouldClose()) {
+	void Game_loop::GameLoop() {
+		while (!WindowShouldClose()) {
 			switch (_gameState) {
-			case onMenu:
-				_menu->run();
+			case Gamestate::onMenu:
+				_menu->Run();
 				_music->updateMusic();
-				if (_menu->getToGameplay()) {
-					_gameState = onGameplay;
-					_menu->setToGameplay(false);
+				if (_menu->GetToGameplay()) {
+					_gameState = Gamestate::onGameplay;
+					_menu->SetToGameplay(false);
 				}
-				if (_menu->getToCredits()) {
-					_gameState = onCredits;
-					_menu->setToCredits(false);
+				if (_menu->GetToCredits()) {
+					_gameState = Gamestate::onCredits;
+					_menu->SetToCredits(false);
 				}
 				break;
-			case onGameplay:
-				_gameplay->run();
+			case Gamestate::onGameplay:
+				_gameplay->Run();
 				_music->updateMusic();
-				if (_gameplay->getToMenu()) {
-					_gameState = onMenu;
-					_gameplay->setToMenu(false);
+				if (_gameplay->GetToMenu()) {
+					_gameState = Gamestate::onMenu;
+					_gameplay->SetToMenu(false);
 				}
-				if (_gameplay->getToCredits()) {
-					_gameState = onCredits;
-					_gameplay->setToCredits(false);
+				if (_gameplay->GetToCredits()) {
+					_gameState = Gamestate::onCredits;
+					_gameplay->SetToCredits(false);
 				}
 				break;
-			case onCredits:
-				_credits->run();
+			case Gamestate::onCredits:
+				_credits->Run();
 				_music->updateMusic();
-				if (_credits->getToGameplay()) {
-					_gameState = onGameplay;
-					_credits->setToGameplay(false);
+				if (_credits->GetToGameplay()) {
+					_gameState = Gamestate::onGameplay;
+					_credits->SetToGameplay(false);
 				}
-				if (_credits->getToMenu()) {
-					_gameState = onMenu;
-					_credits->setToMenu(false);
+				if (_credits->GetToMenu()) {
+					_gameState = Gamestate::onMenu;
+					_credits->SetToMenu(false);
 				}
 				break;
 			default:

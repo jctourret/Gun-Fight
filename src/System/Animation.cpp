@@ -1,26 +1,37 @@
 #include "Animation.h"
 
-Animation::Animation(float animTime, bool looping) {
-	_frameCoords = new std::vector<Vector2>();
+Animation::Animation(float animTime, bool looping)
+{
+	_frameCoords.clear();
 	_animTime = animTime;
-	_animTimer = 0;
+	_looping = looping;
+	_frameTimer = 0;
 	_currentFrame = 0;
 }
 
-void Animation::runAnimation()
+bool Animation::RunAnimation(Rectangle &rectangle)
 {
-	_animTimer += GetFrameTime();
-	if (_animTimer >= _animTime/_frameCoords->size())
+	_frameTimer += GetFrameTime();
+	if (_frameTimer >= _animTime/_frameCoords.size())
 	{
 		_currentFrame++;
-		if (_currentFrame++ >= _frameCoords->size())
+		if (_currentFrame >= _frameCoords.size())
 		{
-			 
+			_currentFrame = 0;
+			if (!_looping)
+			{
+				return false;
+			}
 		}
+		_frameTimer = 0;
 	}
+	rectangle.x = _frameCoords[_currentFrame].x * rectangle.width ;
+	rectangle.y = _frameCoords[_currentFrame].y * rectangle.height;
+	return true;
 }
 
-std::vector<Vector2> Animation::addFrameCoords(Vector2 frameCoords)
+void Animation::AddFrameCoords(float x, float y)
 {
-	_frameCoords->push_back(frameCoords);
+	Vector2 aux = { x,y };
+	_frameCoords.push_back(aux);
 }

@@ -6,23 +6,39 @@
 
 namespace GunFight {
 
+	enum class playerConfig { player1, player2 };
+
+
 	class Player : public Character
 	{
+		Animation* _idleRevolverAimUp;
+		Animation* _idleRevolverAimMid;
+		Animation* _idleRevolverAimDown;
+		Animation* _idleShotgunAimUp;
+		Animation* _idleShotgunAimMid;
+		Animation* _idleShotgunAimDown;
+		Animation* _moveRevolverAimUp;
+		Animation* _moveRevolverAimMid;
+		Animation* _moveRevolverAimDown;
+		Animation* _moveShotgunAimUp;
+		Animation* _moveShotgunAimMid;
+		Animation* _moveShotgunAimDown;
+		Animation* _death;
+		playerConfig _player;
+		Vector2 moveXLimits;
+		Vector2 moveYLimits;
 	public:
-		Player(string tag,  Vector2 pos, string texturePath, int sheetColumns, int sheetRows);
+		Player(string tag, playerConfig player,  Vector2 pos);
 		~Player();
-		Rectangle getBody();
-		int getScore();
-		void update();
-		void draw();
-		void move();
-		void updateAnimation();
-		void fireWeapon();
-		void updateWeapon();
-		void reload();
-		void OnCollisionStay(std::shared_ptr<IColisionable> other) override;
-		void OnCollisionEnter(std::shared_ptr<IColisionable> other) override;
-		void OnCollisionExit(std::shared_ptr<IColisionable> other) override;
+		virtual void Update();
+		virtual void Draw();
+		virtual void Move();
+		virtual void FireWeapon();
+		void UpdateAnimation();
+		void UpdateWeapon();
+		virtual void OnCollisionStay(IColisionable* other);
+		virtual void OnCollisionEnter(IColisionable*  other);
+		virtual void OnCollisionExit(IColisionable* other);
 	};
 }
 #endif

@@ -5,15 +5,14 @@
 
 class Animation
 {
-	std::vector<Vector2>* _frameCoords;
+	std::vector<Vector2> _frameCoords;
 	int _currentFrame;
 	float _animTime;
-	float _animTimer;
+	float _frameTimer;
 	bool _looping;
 public:
 	Animation(float animTime, bool looping);
-	void runAnimation();
-	std::vector<Vector2> addFrameCoords(Vector2 frameCoords);
+	bool RunAnimation(Rectangle &rectangle);
+	void AddFrameCoords(float x, float y);
 };
-
 #endif

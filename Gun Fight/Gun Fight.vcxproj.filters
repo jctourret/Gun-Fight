@@ -25,6 +25,9 @@
     <Filter Include="Interfaces">
       <UniqueIdentifier>{5d73907d-df76-4e49-9994-c48962f11183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Obstacles">
+      <UniqueIdentifier>{d1a9d2a9-fc14-4fa8-b1d4-b9b034c4b765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -32,9 +35,6 @@
       <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Objects\Player1.cpp">
-      <Filter>Objects\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Objects\Player2.cpp">
       <Filter>Objects\Players</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Scenes\Credits.cpp">
@@ -76,15 +76,24 @@
     <ClCompile Include="..\src\System\Animation.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Objects\Cactus.cpp">
+      <Filter>Objects\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Obstacles.cpp">
+      <Filter>Objects\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Tree.cpp">
+      <Filter>Objects\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Wagon.cpp">
+      <Filter>Objects\Obstacles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\System\Game_loop.h">
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Objects\Player1.h">
-      <Filter>Objects\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Objects\Player2.h">
       <Filter>Objects\Players</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Scenes\Credits.h">
@@ -125,6 +134,18 @@
     </ClInclude>
     <ClInclude Include="..\src\System\Animation.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Cactus.h">
+      <Filter>Objects\Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Obstacles.h">
+      <Filter>Objects\Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Tree.h">
+      <Filter>Objects\Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Wagon.h">
+      <Filter>Objects\Obstacles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

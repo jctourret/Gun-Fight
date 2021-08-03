@@ -2,32 +2,62 @@
 
 namespace GunFight{
 	int bulletsPerShot = 3;
-	Vector2 shotgunSpread = { 0.0f,1.f };
+	int bulletsShot = 0;
+	float shotgunPelletWidth = 5;
+	float shotgunPelletHeight = 5;
+	Vector2 shotgunSpread = { 0.0f, 0.05f };
 
-	Shotgun::Shotgun() {
-		_maxBullets = 2;
+	Shotgun::Shotgun() : Weapon("res/assets/snd/LittleRobotSoundFactory_ShotgunShot.wav") {
+		_maxBullets = 6;
 		_bulletsLeft = _maxBullets;
+		for (int i = 0; i < _maxBullets; i++)
+		{
+			_bullets.push_back(new Bullet(shotgunPelletWidth,shotgunPelletHeight));
+		}
 	}
 
-	void Shotgun::fireBullet(Rectangle body, Vector2 direction) {
-		if (_bullets.size()/bulletsPerShot < _maxBullets && _bulletsLeft > 0) {
-			Bullet* bullet = new Bullet(body.x + body.width, body.y + (body.height / 2), _bulletWidth, _bulletHeight);
-			_bullets.push_back(bullet);
-			_bullets.back()->setDirectionX(direction.x-shotgunSpread.x);
-			_bullets.back()->setDirectionY(direction.y-shotgunSpread.y);
+	void Shotgun::FireBullet(Vector2 shootPosition, Vector2 direction) {
+		if (_bulletsLeft > 0) {
+			bulletsShot = 0;
+			for (int i = 0; i < _bullets.size(); i++)
+			{
+				if (!_bullets[i]->GetIsActive())
+				{
+					if (!IsSoundPlaying(_shotSFX))
+					{
+						PlaySound(_shotSFX);
+					}
 
+					_bullets[i]->SetIsActive(true);
+					_bullets[i]->SetBodyX(shootPosition.x);
+					_bullets[i]->SetBodyY(shootPosition.y);
+					
+					switch (bulletsShot)
+					{
+					case 0:
+						_bullets[i]->SetDirectionX(direction.x - shotgunSpread.x);
+						_bullets[i]->SetDirectionY(direction.y - shotgunSpread.y);
+						break;
+					case 1:
+						_bullets[i]->SetDirectionX(direction.x);
+						_bullets[i]->SetDirectionY(direction.y);
+						break;
+					case 2:
+						_bullets[i]->SetDirectionX(direction.x - shotgunSpread.x);
+						_bullets[i]->SetDirectionY(direction.y + shotgunSpread.y);
+						break;
+					default:
+						break;
+					}
 
-			bullet = new Bullet(body.x + body.width, body.y + (body.height / 2), _bulletWidth, _bulletHeight);
-			_bullets.push_back(bullet);
-			_bullets.back()->setDirectionX(direction.x);
-			_bullets.back()->setDirectionY(direction.y);
-
-			bullet = new Bullet(body.x + body.width, body.y + (body.height / 2), _bulletWidth, _bulletHeight);
-			_bullets.push_back(bullet);
-			_bullets.back()->setDirectionX(direction.x-shotgunSpread.x);
-			_bullets.back()->setDirectionY(direction.y+shotgunSpread.y);
-
-			_bulletsLeft--;
+					_bulletsLeft--;
+					bulletsShot++;
+					if (bulletsShot >= bulletsPerShot)
+					{
+						return;
+					}
+				}
+			}
 		}
 	}
 }

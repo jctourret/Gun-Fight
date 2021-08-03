@@ -23,11 +23,14 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Music\music.cpp" />
     <ClCompile Include="..\src\Objects\Bullet.cpp" />
+    <ClCompile Include="..\src\Objects\Cactus.cpp" />
     <ClCompile Include="..\src\Objects\Character.cpp" />
+    <ClCompile Include="..\src\Objects\Obstacles.cpp" />
     <ClCompile Include="..\src\Objects\Player1.cpp" />
-    <ClCompile Include="..\src\Objects\Player2.cpp" />
     <ClCompile Include="..\src\Objects\Revolver.cpp" />
     <ClCompile Include="..\src\Objects\Shotgun.cpp" />
+    <ClCompile Include="..\src\Objects\Tree.cpp" />
+    <ClCompile Include="..\src\Objects\Wagon.cpp" />
     <ClCompile Include="..\src\Objects\Weapon.cpp" />
     <ClCompile Include="..\src\Scenes\Credits.cpp" />
     <ClCompile Include="..\src\Scenes\Gameplay.cpp" />
@@ -41,11 +44,14 @@
     <ClInclude Include="..\src\Interfaces\IColisionable.h" />
     <ClInclude Include="..\src\Music\music.h" />
     <ClInclude Include="..\src\Objects\Bullet.h" />
+    <ClInclude Include="..\src\Objects\Cactus.h" />
     <ClInclude Include="..\src\Objects\Character.h" />
+    <ClInclude Include="..\src\Objects\Obstacles.h" />
     <ClInclude Include="..\src\Objects\Player1.h" />
-    <ClInclude Include="..\src\Objects\Player2.h" />
     <ClInclude Include="..\src\Objects\Revolver.h" />
     <ClInclude Include="..\src\Objects\Shotgun.h" />
+    <ClInclude Include="..\src\Objects\Tree.h" />
+    <ClInclude Include="..\src\Objects\Wagon.h" />
     <ClInclude Include="..\src\Objects\Weapon.h" />
     <ClInclude Include="..\src\Scenes\Credits.h" />
     <ClInclude Include="..\src\Scenes\Gameplay.h" />
@@ -107,8 +113,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Platform_actual)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Platform_actual)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
@@ -132,6 +138,9 @@ PLATFORM_DESKTOP
       <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib-2.5.0-Win32-msvc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>call "$(SolutionDir)build.bat" "$(SolutionDir)" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -163,7 +172,7 @@ PLATFORM_DESKTOP
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)"build.bat "$(SolutionDir)" "$(OutDir)"</Command>
+      <Command>call "$(SolutionDir)build.bat" "$(SolutionDir)" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

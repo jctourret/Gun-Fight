@@ -6,64 +6,66 @@ using namespace GunFight;
 
 namespace GunFight {
 	
-	static const int titlePosX = screenWidth/3;
-	static const int titlePosY = 200;
-	static const int titleFontSize = 50;
-	static const int textFontSize = 20;
-	static const int playPosX = screenWidth/3;
-	static const int playPosY = 400;
-	static const int controlsPosX = screenWidth / 3;
-	static const int controlsPosY = 500;
-	static const int movePosX = screenWidth / 3;
-	static const int movePosY = 540;
-	static const int shootUpPosX = screenWidth / 3;
-	static const int shootUpPosY = 580;
-	static const int shootMidPosX = screenWidth / 3;
-	static const int shootMidPosY = 620;
-	static const int shootDownPosX = screenWidth / 3;
-	static const int shootDownPosY = 660;
+	const int titlePosX = 500;
+	const int titlePosY = 50;
+	const int titleFontSize = 50;
+	const int textFontSize = 20;
+	const int playPosX = 500;
+	const int playPosY = 150;
+	const int controlsPosX = 20;
+	const int controlsPosY = 500;
+	const int movePosX = 20;
+	const int movePosY = 540;
+	const int shootUpPosX = 20;
+	const int shootUpPosY = 580;
+	const int shootMidPosX = 20;
+	const int shootMidPosY = 620;
+	const int shootDownPosX = 20;
+	const int shootDownPosY = 660;
 
-	static const Color textColor = YELLOW;
+	const Color textColor = YELLOW;
 	
 	Menu::Menu() {
 		_menuOn = true;
 		_toGameplay = false;
 		_toCredits = false;
+		_background = LoadTexture("res/assets/img/BKDawn.png");
 	}
 
 	Menu::~Menu() {
 	}
 
-	void Menu::setToGameplay(bool toGameplay) {
+	void Menu::SetToGameplay(bool toGameplay) {
 		_toGameplay = toGameplay;
 	}
 
-	void Menu::setToCredits(bool toCredits) {
+	void Menu::SetToCredits(bool toCredits) {
 		_toCredits = toCredits;
 	}
 
-	bool Menu::getToCredits() {
+	bool Menu::GetToCredits() {
 		return _toCredits;
 	}
-	bool Menu::getToGameplay() {
+	bool Menu::GetToGameplay() {
 		return _toGameplay;
 	}
 
-	void Menu::run() {
-		update();
-		draw();
+	void Menu::Run() {
+		Update();
+		Draw();
 	}
 
-	void Menu::update() {
+	void Menu::Update() {
 		if (IsKeyPressed(KEY_ENTER)) {
 			_menuOn = false;
 			_toGameplay = true;
 		}
 	}
 
-	void Menu::draw() {
+	void Menu::Draw() {
 		BeginDrawing();
 		ClearBackground(BLACK);
+		DrawTexture(_background,0,0,WHITE);
 		DrawText("GUN FIGHT!", titlePosX, titlePosY, titleFontSize, textColor);
 		DrawText("Press ENTER to GUN FIGHT!", playPosX, playPosY, textFontSize, textColor);
 		DrawText("CONTROLS: PLAYER 1 / PLAYER 2", controlsPosX, controlsPosY, textFontSize, textColor);

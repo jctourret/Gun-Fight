@@ -8,7 +8,7 @@
 
 namespace GunFight {
 
-	enum Gamestate {
+	enum class Gamestate {
 		onMenu,
 		onGameplay,
 		onCredits,
@@ -26,7 +26,7 @@ namespace GunFight {
 	public:
 		Game_loop();
 		~Game_loop();
-		void game_loop();
+		void GameLoop();
 	};
 }
 

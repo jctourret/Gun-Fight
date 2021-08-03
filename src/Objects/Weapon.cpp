@@ -1,38 +1,56 @@
 #include "Weapon.h"
 #include "System/Screen.h"
+#include <iostream>
 
 namespace GunFight {
 
-	Weapon::Weapon() {
-		_maxBullets = 6;
-		_bulletsLeft = _maxBullets;
-		_bulletWidth = 10;
-		_bulletHeight = 5;
+	Weapon::Weapon(string soundPath)
+	{
+		_maxBullets = 0;
+		_bulletsLeft = 0;
+		_shotSFX = LoadSound(soundPath.c_str());
 	}
-	Weapon::~Weapon() {
-		for (int i = _bullets.size()-1; i < 0; i--)
+	Weapon::~Weapon()
+	{
+		if (_bullets.size() != 0)
 		{
-			if (_bullets[i] != NULL)
+			for (int i = _bullets.size() - 1; i > 0; i--)
 			{
-				delete _bullets[i];
-				_bullets.pop_back();
+				if (_bullets[i] != NULL)
+				{
+					delete _bullets[i];
+					_bullets.pop_back();
+				}
 			}
 		}
 	}
 
-	void Weapon::fireBullet(Rectangle body, Vector2 direction) {
-		
+	float Weapon::GetBulletsLeft()
+	{
+		return _bulletsLeft;
 	}
 
-	void Weapon::update() {
+	vector<Bullet*> Weapon::GetBullets()
+	{
+		return _bullets;
+	}
+
+	void Weapon::FireBullet(Vector2 shootPosition, Vector2 direction) {
+
+	}
+
+	void Weapon::Update() {
 		for (int i = 0 ; i < _bullets.size() ; i++) {
-			_bullets[i]->update();
+			_bullets[i]->Update();
 		}
 	}
 
-	void Weapon::draw() {
+	void Weapon::Draw() {
 		for (int i = 0; i < _bullets.size(); i++) {
-			_bullets[i]->draw();
+			_bullets[i]->Draw();
 		}
+	}
+	void Weapon::Reload() {
+		_bulletsLeft = _maxBullets;
 	}
 }

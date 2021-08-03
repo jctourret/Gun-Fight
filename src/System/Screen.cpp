@@ -5,21 +5,21 @@ using namespace GunFight;
 namespace GunFight {
 	Screen::Screen() {
 		_resolution.width = screenWidth;
-		_resolution.height = screeenHeight;
+		_resolution.height = screenHeight;
 	}
 
 	Screen::~Screen() {
 	}
-	void Screen::setResolutionWidth(int width) {
+	void Screen::SetResolutionWidth(int width) {
 		_resolution.width = width;
 	}
-	void Screen::setResolutionHeight(int height) {
+	void Screen::SetResolutionHeight(int height) {
 		_resolution.height = height;
 	}
-	int Screen::getResolutionWidth() {
+	int Screen::GetResolutionWidth() {
 		return _resolution.width;
 	}
-	int Screen::getResolutionHeight() {
+	int Screen::GetResolutionHeight() {
 		return _resolution.height;
 	}
 }

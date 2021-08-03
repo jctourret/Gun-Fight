@@ -10,13 +10,13 @@ namespace GunFight {
 	public:
 		Credits();
 		~Credits();
-		void setToMenu(bool toMenu);
-		void setToGameplay(bool toGameplay);
-		bool getToMenu();
-		bool getToGameplay();
-		void run();
-		void update();
-		void draw();
+		void SetToMenu(bool toMenu);
+		void SetToGameplay(bool toGameplay);
+		bool GetToMenu();
+		bool GetToGameplay();
+		void Run();
+		void Update();
+		void Draw();
 	};
 }
 #endif

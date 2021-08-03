@@ -1,34 +1,43 @@
 #ifndef BULLET_H
 #define BULLET_H
 #include "raylib.h"
+#include "Interfaces/IColisionable.h"
 
 namespace GunFight {
 
-	class Bullet {
+	class Bullet : public IColisionable {
 	private:
+		std::string _tag;
 		Rectangle _body;
 		float _speed;
 		Vector2 _direction;
-		bool _hasScored;
+		bool _isActive;
+		Sound _hitSFX;
 	public:
-		Bullet(float x, float y, float width, float height);
+		Bullet(float width, float height);
 		~Bullet();
-		void setBody(Rectangle body);
-		void setBodyX(float x);
-		void setBodyY(float y);
-		void setSpeed(float speed);
-		void setDirectionX(float x);
-		void setDirectionY(float y);
-		Rectangle getBody();
-		float getBodyX();
-		float getBodyY();
-		float getBodyHeight();
-		float getSpeed();
-		float getDirectionX();
-		float getDirectionY();
-		void update();
-		void draw();
-		void move();
+		float GetBodyX();
+		float GetBodyY();
+		float GetBodyHeight();
+		float GetSpeed();
+		float GetDirectionX();
+		float GetDirectionY();
+		bool GetIsActive();
+		void SetBody(Rectangle body);
+		void SetBodyX(float x);
+		void SetBodyY(float y);
+		void SetSpeed(float speed);
+		void SetDirectionX(float x);
+		void SetDirectionY(float y);
+		void SetIsActive(bool isActive);
+		virtual std::string GetTag();
+		virtual Rectangle GetBody();
+		virtual void OnCollisionEnter(IColisionable* other);
+		virtual void OnCollisionStay(IColisionable* other);
+		virtual void OnCollisionExit(IColisionable* other);
+		void Update();
+		void Draw();
+		void Move();
 	};
 }
 #endif

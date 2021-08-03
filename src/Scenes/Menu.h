@@ -9,16 +9,17 @@ namespace GunFight {
 		bool _menuOn;
 		bool _toGameplay;
 		bool _toCredits;
+		Texture2D _background;
 	public:
 		Menu();
 		~Menu();
-		void setToGameplay(bool toGameplay);
-		void setToCredits(bool toCredits);
-		bool getToGameplay();
-		bool getToCredits();
-		void run();
-		void update();
-		void draw();
+		void SetToGameplay(bool toGameplay);
+		void SetToCredits(bool toCredits);
+		bool GetToGameplay();
+		bool GetToCredits();
+		void Run();
+		void Update();
+		void Draw();
 	};
 }
 #endif

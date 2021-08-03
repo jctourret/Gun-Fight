@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include <memory>
+#include <vector>
 #include <string>
 
 namespace GunFight {
@@ -8,14 +8,18 @@ namespace GunFight {
 	class IColisionable
 	{
 	public:
-		virtual Rectangle GetBody() = 0;
 
-		virtual void OnCollisionStay(std::shared_ptr<IColisionable> other) = 0;
+		IColisionable();
 
-		virtual void OnCollisionEnter(std::shared_ptr<IColisionable> other) = 0;
+		virtual Rectangle GetBody();
 
-		virtual void OnCollisionExit(std::shared_ptr<IColisionable> other) = 0;
+		virtual std::string GetTag();
 
-		virtual std::string GetTag() = 0;
+		virtual void OnCollisionStay(IColisionable* other);
+
+		virtual void OnCollisionEnter(IColisionable* other);
+
+		virtual void OnCollisionExit(IColisionable* other);
+
 	};
 }

@@ -18,14 +18,16 @@ namespace GunFight
 	protected:
 		vector<Bullet*> _bullets;
 		int _maxBullets;
-		float _bulletWidth;
-		float _bulletHeight;
 		float _bulletsLeft;
+		Sound _shotSFX;
 	public:
-		Weapon();
+		Weapon(string soundPath);
 		~Weapon();
-		virtual void fireBullet(Rectangle body, Vector2 direction);
-		virtual void update();
-		void draw();
+		float GetBulletsLeft();
+		vector<Bullet*> GetBullets();
+		virtual void FireBullet(Vector2 shootPosition, Vector2 direction);
+		virtual void Update();
+		void Reload();
+		void Draw();
 	};
 }
