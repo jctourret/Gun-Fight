@@ -54,7 +54,7 @@ namespace GunFight {
 	const float peaceTime = 2.00f;
 	const float reloadTime = 1.99f;
 	const float deadTime = 2.0f;
-	const float gameTime = 2.0f;
+	const float gameTime = 70.0f;
 
 	float peaceTimer = 0.0f;
 	float reloadTimer = 0.0f;
